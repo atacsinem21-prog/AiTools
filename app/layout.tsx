@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 
 const inter = Inter({
@@ -25,6 +26,15 @@ export default function RootLayout({
     <html lang="en" className="dark">
       <body className={`${inter.variable} bg-bg text-slate-100 antialiased`}>
         {children}
+        {process.env.NEXT_PUBLIC_ADSENSE_CLIENT ? (
+          <Script
+            id="adsense-script"
+            async
+            strategy="afterInteractive"
+            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_ADSENSE_CLIENT}`}
+            crossOrigin="anonymous"
+          />
+        ) : null}
       </body>
     </html>
   );

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { AdSlot } from "@/components/AdSlot";
 import { CategoryCard } from "@/components/CategoryCard";
 import { NewsletterSignup } from "@/components/NewsletterSignup";
 import { SearchBar } from "@/components/SearchBar";
@@ -42,6 +43,7 @@ export default function HomePage({ params }: Props) {
   const trendingSlugs = new Set(trending.map((tool) => tool.slug));
   const newTools = getNewTools().filter((tool) => !trendingSlugs.has(tool.slug));
   const schema = itemListSchema(getSiteUrl(), trending);
+  const adSlot = process.env.NEXT_PUBLIC_ADSENSE_HOME_SLOT ?? "0000000000";
 
   return (
     <div className="space-y-12">
@@ -124,6 +126,22 @@ export default function HomePage({ params }: Props) {
         </p>
       </section>
 
+      <section className="space-y-3 rounded-2xl border border-slate-800 bg-slate-900/70 p-6">
+        <h2 className="text-2xl font-semibold text-slate-100">
+          {locale === "tr" ? "Sponsorlu alan" : "Sponsored placement"}
+        </h2>
+        <p className="text-sm text-slate-300">
+          {locale === "tr"
+            ? "Bu alanda Google Ads sponsor içerikleri gösterilir."
+            : "Google Ads sponsored placements appear in this section."}
+        </p>
+        <AdSlot
+          slot={adSlot}
+          className="glass-card rounded-2xl border border-slate-800 p-3"
+          format="horizontal"
+        />
+      </section>
+
       <section>
         <h2 className="mb-4 text-2xl font-semibold text-slate-100">
           {locale === "tr" ? "🔥 Trend AI araçları" : "🔥 Trending AI tools"}
@@ -184,6 +202,65 @@ export default function HomePage({ params }: Props) {
             );
           })}
         </div>
+      </section>
+
+      <section className="glass-card rounded-2xl p-6">
+        <h2 className="mb-4 text-2xl font-semibold text-slate-100">{t(locale, "faq")}</h2>
+        <div className="space-y-3">
+          <details className="rounded-xl border border-slate-800 bg-slate-900/70 p-4">
+            <summary className="cursor-pointer font-medium text-slate-100">
+              {locale === "tr"
+                ? "Bu sitedeki AI araçları nasıl listeleniyor?"
+                : "How are AI tools listed on this site?"}
+            </summary>
+            <p className="mt-2 text-sm text-slate-300">
+              {locale === "tr"
+                ? "Araçlar otomatik kaynak taraması ve editoryal kalite kontrol ile düzenli olarak güncellenir."
+                : "Tools are updated regularly through automated source ingestion plus editorial quality checks."}
+            </p>
+          </details>
+          <details className="rounded-xl border border-slate-800 bg-slate-900/70 p-4">
+            <summary className="cursor-pointer font-medium text-slate-100">
+              {locale === "tr"
+                ? "Araç karşılaştırmaları neye göre hazırlanıyor?"
+                : "How are comparison pages prepared?"}
+            </summary>
+            <p className="mt-2 text-sm text-slate-300">
+              {locale === "tr"
+                ? "Kategori, güncellik, kullanım senaryosu ve kullanıcı değeri sinyallerine göre hazırlanır."
+                : "They are generated and curated using category relevance, freshness, use case fit and value signals."}
+            </p>
+          </details>
+          <details className="rounded-xl border border-slate-800 bg-slate-900/70 p-4">
+            <summary className="cursor-pointer font-medium text-slate-100">
+              {locale === "tr"
+                ? "Sitenize reklam veya sponsorluk verebilir miyim?"
+                : "Can I advertise or sponsor content on your site?"}
+            </summary>
+            <p className="mt-2 text-sm text-slate-300">
+              {locale === "tr"
+                ? "Evet. Reklam ve sponsorluk anlaşmaları için bize e-posta ile ulaşabilirsiniz."
+                : "Yes. You can contact us via email for advertising and sponsorship opportunities."}
+            </p>
+          </details>
+        </div>
+      </section>
+
+      <section className="glass-card rounded-2xl p-6">
+        <h2 className="text-2xl font-semibold text-slate-100">
+          {locale === "tr" ? "Reklam ve is birligi" : "Advertising and partnerships"}
+        </h2>
+        <p className="mt-3 text-sm text-slate-300">
+          {locale === "tr"
+            ? "Markanizi AI odakli hedef kitleye ulasmak icin tanitmak istiyorsaniz bizimle iletisime gecin."
+            : "Reach an AI-focused audience by contacting us for campaign and partnership options."}
+        </p>
+        <a
+          href="mailto:atacsinem21@gmail.com?subject=Reklam%20ve%20is%20birligi%20teklifi"
+          className="mt-4 inline-flex rounded-xl border border-cyan-400/60 px-4 py-2 text-sm font-medium text-cyan-300 hover:border-cyan-300 hover:text-cyan-200"
+        >
+          atacsinem21@gmail.com
+        </a>
       </section>
 
       <NewsletterSignup locale={locale} />
