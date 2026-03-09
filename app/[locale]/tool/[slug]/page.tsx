@@ -27,11 +27,11 @@ export function generateMetadata({ params }: Props): Metadata {
     locale,
     title:
       locale === "tr"
-        ? `${tool.name} inceleme, fiyat ve ozellikler`
+        ? `${tool.name} inceleme, fiyat ve özellikler`
         : `${tool.name} review, pricing and features`,
     description:
       locale === "tr"
-        ? `${tool.name} detaylari, kullanim alanlari ve fiyat modeli: ${pricing}.`
+        ? `${tool.name} detayları, kullanım alanları ve fiyat modeli: ${pricing}.`
         : `${tool.name} use cases, key features and pricing model: ${pricing}.`,
     pathWithoutLocale: `/tool/${tool.slug}`,
   });

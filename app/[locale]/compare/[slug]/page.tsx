@@ -41,7 +41,7 @@ export function generateMetadata({ params }: Props): Metadata {
 
   const description =
     locale === "tr"
-      ? `${left.name} ve ${right.name} icin ozellik, fiyat, kullanim senaryosu ve ekip bazli onerileri karsilastirin.`
+      ? `${left.name} ve ${right.name} için özellik, fiyat, kullanım senaryosu ve ekip bazlı önerileri karşılaştırın.`
       : `Compare pricing, features, use cases and team-fit recommendations for ${left.name} and ${right.name}.`;
 
   return buildMetadata({
@@ -234,11 +234,11 @@ export default function ComparePage({ params }: Props) {
 
       <section className="space-y-3 rounded-xl border border-slate-800 bg-slate-900 p-5">
         <h2 className="text-2xl font-semibold text-slate-100">
-          {locale === "tr" ? "Kullanim senaryosuna gore onerilen secim" : "Recommended choice by use case"}
+          {locale === "tr" ? "Kullanım senaryosuna göre önerilen seçim" : "Recommended choice by use case"}
         </h2>
         <p className="text-sm text-slate-300">
           {locale === "tr"
-            ? `${left.name} hizli icerik uretimi, gunluk operasyon ve daha cevik is akislarinda one cikabilir. ${right.name} ise uzun baglam, detayli degerlendirme ve stratejik analiz odakli kullanimlarda daha guclu olabilir.`
+            ? `${left.name} hızlı içerik üretimi, günlük operasyon ve daha çevik iş akışlarında öne çıkabilir. ${right.name} ise uzun bağlam, detaylı değerlendirme ve stratejik analiz odaklı kullanımlarda daha güçlü olabilir.`
             : `${left.name} can be a better fit for fast execution and high-volume daily output, while ${right.name} may be stronger for long-context analysis and strategy-heavy workflows.`}
         </p>
       </section>

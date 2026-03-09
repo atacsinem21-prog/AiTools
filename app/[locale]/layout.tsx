@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { notFound } from "next/navigation";
 import { Footer } from "@/components/Footer";
+import { IntroGate } from "@/components/IntroGate";
 import { Navbar } from "@/components/Navbar";
 import { StickyNewsletterCta } from "@/components/StickyNewsletterCta";
 import { isLocale } from "@/lib/i18n";
@@ -17,6 +18,7 @@ export default function LocaleLayout({ children, params }: Props) {
 
   return (
     <div className="min-h-screen bg-bg">
+      <IntroGate locale={params.locale} />
       <Navbar locale={params.locale} />
       <main className="mx-auto max-w-6xl px-4 py-10 pb-28">{children}</main>
       <Footer locale={params.locale} />
