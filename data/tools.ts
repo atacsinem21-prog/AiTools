@@ -34,41 +34,41 @@ export type ToolPricing = {
 export const categories: Category[] = [
   {
     slug: "video-ai",
-    name: { tr: "Video AI", en: "Video AI" },
+    name: { tr: "Video Yapay Zeka", en: "Video AI" },
     seoIntro: {
-      tr: "Video AI kategorisinde en iyi araçları karşılaştır, fiyatlarını incele ve iş akışını hızlandır.",
+      tr: "Video yapay zeka kategorisinde en iyi araçları karşılaştır, fiyatlarını incele ve iş akışını hızlandır.",
       en: "Discover top Video AI tools, compare features and pick the best platform for your workflow.",
     },
   },
   {
     slug: "marketing-ai",
-    name: { tr: "Marketing AI", en: "Marketing AI" },
+    name: { tr: "Pazarlama Yapay Zeka", en: "Marketing AI" },
     seoIntro: {
-      tr: "Marketing AI araçları ile kampanyaları optimize et, daha hızlı içerik üret ve dönüşümü artır.",
+      tr: "Pazarlama yapay zeka araçları ile kampanyaları optimize et, daha hızlı içerik üret ve dönüşümü artır.",
       en: "Explore Marketing AI platforms to optimize campaigns, produce faster content and improve conversion.",
     },
   },
   {
     slug: "productivity-ai",
-    name: { tr: "Productivity AI", en: "Productivity AI" },
+    name: { tr: "Verimlilik Yapay Zeka", en: "Productivity AI" },
     seoIntro: {
-      tr: "Productivity AI araçları ile planlama, not alma ve otomasyon süreçlerini tek yerden yönet.",
+      tr: "Verimlilik yapay zeka araçları ile planlama, not alma ve otomasyon süreçlerini tek yerden yönet.",
       en: "Use Productivity AI tools to improve planning, note-taking and automation in one place.",
     },
   },
   {
     slug: "coding-ai",
-    name: { tr: "Coding AI", en: "Coding AI" },
+    name: { tr: "Kodlama Yapay Zeka", en: "Coding AI" },
     seoIntro: {
-      tr: "Coding AI araçlarıyla kod inceleme, test ve dokümantasyon sürecini hızlandır.",
+      tr: "Kodlama yapay zeka araçlarıyla kod inceleme, test ve dokümantasyon sürecini hızlandır.",
       en: "Boost development speed with Coding AI tools for code reviews, testing and documentation.",
     },
   },
   {
     slug: "image-ai",
-    name: { tr: "Image AI", en: "Image AI" },
+    name: { tr: "Görsel Yapay Zeka", en: "Image AI" },
     seoIntro: {
-      tr: "Image AI araçları ile görsel oluşturma, düzenleme ve marka varlıklarını tek panelde yönet.",
+      tr: "Görsel yapay zeka araçları ile görsel oluşturma, düzenleme ve marka varlıklarını tek panelde yönet.",
       en: "Generate and edit visuals with Image AI tools built for creators, teams and brands.",
     },
   },

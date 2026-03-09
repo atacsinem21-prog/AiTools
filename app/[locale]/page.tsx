@@ -22,6 +22,20 @@ import { getSiteUrl } from "@/lib/site-url";
 
 type Props = { params: { locale: string } };
 
+function formatGuideLabel(slug: string, locale: Locale) {
+  if (locale !== "tr") return slug.replaceAll("-", " ");
+
+  return slug
+    .replaceAll("-", " ")
+    .replace(/\bai\b/g, "yapay zeka")
+    .replace(/\btools\b/g, "araçlar")
+    .replace(/\bbest\b/g, "en iyi")
+    .replace(/\bfree\b/g, "ücretsiz")
+    .replace(/\bnew\b/g, "yeni")
+    .replace(/\bfor\b/g, "için")
+    .replace(/\bvs\b/g, "karşılaştırması");
+}
+
 export function generateMetadata({ params }: Props): Metadata {
   const locale = getLocaleFromPath(params.locale);
   return buildMetadata({
@@ -181,7 +195,7 @@ export default function HomePage({ params }: Props) {
       <section>
         <div className="mb-4 flex items-center justify-between">
           <h2 className="text-2xl font-semibold text-slate-100">
-            {locale === "tr" ? "Popüler compare sayfaları" : "Popular compare pages"}
+            {locale === "tr" ? "Popüler karşılaştırma sayfaları" : "Popular compare pages"}
           </h2>
           <Link href={`/${locale}/compare`} className="text-sm text-cyan-300 hover:text-cyan-200">
             {locale === "tr" ? "Tümünü gör" : "View all"}
@@ -191,7 +205,11 @@ export default function HomePage({ params }: Props) {
           {comparePairs.map((pair) => {
             const left = getToolBySlug(pair.leftToolSlug);
             const right = getToolBySlug(pair.rightToolSlug);
-            const title = left && right ? `${left.name} vs ${right.name}` : pair.slug;
+            const title = left && right
+              ? locale === "tr"
+                ? `${left.name} ve ${right.name} karşılaştırması`
+                : `${left.name} vs ${right.name}`
+              : pair.slug;
             return (
               <Link
                 key={pair.slug}
@@ -199,7 +217,9 @@ export default function HomePage({ params }: Props) {
                 className="rounded-xl border border-slate-800 bg-slate-900 px-4 py-3 hover:border-cyan-400"
               >
                 <p className="font-medium text-slate-100">{title}</p>
-                <p className="mt-1 text-sm text-slate-400">{pair.slug}</p>
+                <p className="mt-1 text-sm text-slate-400">
+                  {locale === "tr" ? "Detaylı karşılaştırmayı aç" : pair.slug}
+                </p>
               </Link>
             );
           })}
@@ -222,7 +242,7 @@ export default function HomePage({ params }: Props) {
               href={`/${locale}/${slug}`}
               className="rounded-md border border-slate-700 px-3 py-2 text-sm text-slate-200 hover:border-cyan-400"
             >
-              {slug.replaceAll("-", " ")}
+              {formatGuideLabel(slug, locale)}
             </Link>
           ))}
         </div>
