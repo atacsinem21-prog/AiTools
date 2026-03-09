@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { Locale } from "@/data/tools";
 
 export function Footer({ locale }: { locale: Locale }) {
@@ -15,6 +16,17 @@ export function Footer({ locale }: { locale: Locale }) {
             atacsinem21@gmail.com
           </a>
         </p>
+        <div className="mt-3 flex flex-wrap gap-3 text-xs">
+          <Link href={`/${locale}/faq`} className="text-slate-300 hover:text-cyan-300">
+            {locale === "tr" ? "SSS" : "FAQ"}
+          </Link>
+          <Link href={`/${locale}/privacy-policy`} className="text-slate-300 hover:text-cyan-300">
+            {locale === "tr" ? "Gizlilik Politikasi" : "Privacy Policy"}
+          </Link>
+          <Link href={`/${locale}/terms-of-use`} className="text-slate-300 hover:text-cyan-300">
+            {locale === "tr" ? "Kullanim Sartlari" : "Terms of Use"}
+          </Link>
+        </div>
       </div>
     </footer>
   );
