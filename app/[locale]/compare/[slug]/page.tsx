@@ -11,6 +11,7 @@ import {
 } from "@/data/tools";
 import { getLocaleFromPath } from "@/lib/i18n";
 import { buildMetadata } from "@/lib/seo";
+import { getSiteUrl } from "@/lib/site-url";
 
 type Props = {
   params: { locale: string; slug: string };
@@ -71,7 +72,7 @@ export default function ComparePage({ params }: Props) {
   const related = getTrendingTools().filter(
     (tool) => tool.slug !== left.slug && tool.slug !== right.slug
   );
-  const pageUrl = `${process.env.NEXT_PUBLIC_SITE_URL ?? "https://example.com"}/${locale}/compare/${pair.slug}`;
+  const pageUrl = `${getSiteUrl()}/${locale}/compare/${pair.slug}`;
 
   const schema = {
     "@context": "https://schema.org",

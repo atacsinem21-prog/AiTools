@@ -1,7 +1,8 @@
 import type { MetadataRoute } from "next";
 import { categories, comparePairs, landingSlugs, tools } from "@/data/tools";
+import { getSiteUrl } from "@/lib/site-url";
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://example.com";
+const baseUrl = getSiteUrl();
 const locales = ["tr", "en"] as const;
 
 export default function sitemap(): MetadataRoute.Sitemap {

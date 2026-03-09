@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import type { Locale } from "@/data/tools";
 import { alternatesFor } from "@/lib/i18n";
+import { getSiteUrl } from "@/lib/site-url";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://example.com";
+const siteUrl = getSiteUrl();
 const siteName = "Global AI Tools";
 
 type MetadataInput = {
