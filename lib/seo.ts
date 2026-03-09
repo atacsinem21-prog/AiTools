@@ -55,3 +55,34 @@ export function itemListSchema(url: string, items: Array<{ name: string; slug: s
     })),
   };
 }
+
+export function breadcrumbSchema(items: Array<{ name: string; url: string }>) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      item: item.url,
+    })),
+  };
+}
+
+export function articleSchema(input: { title: string; description: string; url: string }) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: input.title,
+    description: input.description,
+    mainEntityOfPage: input.url,
+    author: {
+      "@type": "Organization",
+      name: "Global AI Tools",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Global AI Tools",
+    },
+  };
+}

@@ -3,7 +3,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { comparePairs, getTrendingTools, landingSlugs, tools, type Locale } from "@/data/tools";
 import { getLocaleFromPath } from "@/lib/i18n";
-import { buildMetadata } from "@/lib/seo";
+import { articleSchema, buildMetadata, breadcrumbSchema } from "@/lib/seo";
+import { getSiteUrl } from "@/lib/site-url";
 
 type Props = {
   params: { locale: string; landingSlug: string };
@@ -46,6 +47,20 @@ export default function LandingPage({ params }: Props) {
   const title = humanize(params.landingSlug);
   const featured = tools.slice(0, 6);
   const trending = getTrendingTools();
+  const baseUrl = getSiteUrl();
+  const pageUrl = `${baseUrl}/${locale}/${params.landingSlug}`;
+  const article = articleSchema({
+    title: `${title} ${locale === "tr" ? "rehberi 2026" : "guide 2026"}`,
+    description:
+      locale === "tr"
+        ? `${title} için en iyi AI araçları, kullanım senaryoları ve fiyat/performans önerileri.`
+        : `Best AI tools, use cases and value recommendations for ${title}.`,
+    url: pageUrl,
+  });
+  const breadcrumb = breadcrumbSchema([
+    { name: locale === "tr" ? "Ana Sayfa" : "Home", url: `${baseUrl}/${locale}` },
+    { name: title, url: pageUrl },
+  ]);
 
   return (
     <article className="space-y-6">
@@ -55,6 +70,22 @@ export default function LandingPage({ params }: Props) {
           ? `${title} odaklı bu landing page, Google indexleme ve internal linking gücünü artırmak için optimize edildi.`
           : `This landing page is optimized for indexation and internal linking around ${title}.`}
       </p>
+
+      <section className="space-y-3 rounded-xl border border-slate-800 bg-slate-900 p-5">
+        <h2 className="text-xl font-semibold text-slate-100">
+          {locale === "tr" ? `${title} neden önemli?` : `Why ${title} matters`}
+        </h2>
+        <p className="text-sm text-slate-300">
+          {locale === "tr"
+            ? "Doğru AI aracı seçimi üretim hızını, ekip verimliliğini ve maliyet kontrolünü doğrudan etkiler. Bu sayfada listelenen araçlar, özellikle 2026 trendlerinde öne çıkan kullanım senaryolarına göre seçildi."
+            : "Choosing the right AI tool directly impacts speed, team efficiency and cost control. The tools listed on this page are selected around high-intent use cases trending in 2026."}
+        </p>
+        <p className="text-sm text-slate-300">
+          {locale === "tr"
+            ? "Nasıl kullanılır: Önce ihtiyacınızı netleştirin, ardından listedeki iki aracı kısa bir pilotla karşılaştırın. Son olarak entegrasyon ve bütçe kriterlerine göre kalıcı karar verin."
+            : "How to use: define your exact need, compare two shortlisted tools in a short pilot, then finalize based on integration fit and total cost."}
+        </p>
+      </section>
 
       <section className="space-y-2">
         {featured.map((tool) => (
@@ -101,6 +132,8 @@ export default function LandingPage({ params }: Props) {
           ))}
         </div>
       </section>
+
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify([article, breadcrumb]) }} />
     </article>
   );
 }

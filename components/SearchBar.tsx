@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
 import type { Locale, Tool } from "@/data/tools";
 import { t } from "@/lib/i18n";
@@ -11,6 +13,7 @@ type SearchBarProps = {
 };
 
 export function SearchBar({ tools, locale }: SearchBarProps) {
+  const router = useRouter();
   const [query, setQuery] = useState("");
 
   const filtered = useMemo(() => {
@@ -32,21 +35,53 @@ export function SearchBar({ tools, locale }: SearchBarProps) {
 
   return (
     <section className="space-y-6">
-      <input
-        value={query}
-        onChange={(event) => setQuery(event.target.value)}
-        placeholder={t(locale, "searchPlaceholder")}
-        className="w-full rounded-xl border border-slate-700 bg-slate-900 px-4 py-3 text-slate-100 placeholder:text-slate-500 focus:border-cyan-400 focus:outline-none"
-        aria-label={t(locale, "searchPlaceholder")}
-      />
+      <form
+        className="flex flex-col gap-2 sm:flex-row"
+        onSubmit={(event) => {
+          event.preventDefault();
+          const normalized = query.trim().toLowerCase().replaceAll(/\s+/g, "-");
+          if (normalized) {
+            router.push(`/${locale}/search/${normalized}`);
+          }
+        }}
+      >
+        <input
+          value={query}
+          onChange={(event) => setQuery(event.target.value)}
+          placeholder={t(locale, "searchPlaceholder")}
+          className="w-full rounded-xl border border-slate-700 bg-slate-900 px-4 py-3 text-slate-100 placeholder:text-slate-500 focus:border-cyan-400 focus:outline-none"
+          aria-label={t(locale, "searchPlaceholder")}
+        />
+        <button
+          type="submit"
+          className="rounded-xl bg-cyan-500 px-5 py-3 text-sm font-medium text-slate-950 hover:bg-cyan-400"
+        >
+          {locale === "tr" ? "SEO Arama Sayfası" : "Open SEO Search Page"}
+        </button>
+      </form>
 
       {filtered.length === 0 ? (
         <p className="text-sm text-slate-400">{t(locale, "noResults")}</p>
       ) : (
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {filtered.map((tool) => (
-            <ToolCard key={tool.slug} tool={tool} locale={locale} />
-          ))}
+        <div className="space-y-3">
+          <p className="text-xs text-slate-400">
+            {locale === "tr"
+              ? "İndekslenebilir arama sonucu sayfası için üstten butonu kullan."
+              : "Use the button above to open an indexable search result page."}
+          </p>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {filtered.map((tool) => (
+              <ToolCard key={tool.slug} tool={tool} locale={locale} />
+            ))}
+          </div>
+          {query.trim().length > 0 && (
+            <Link
+              href={`/${locale}/search/${query.trim().toLowerCase().replaceAll(/\s+/g, "-")}`}
+              className="inline-block text-sm text-cyan-300 hover:text-cyan-200"
+            >
+              {locale === "tr" ? "Aramayı ayrı sayfada aç" : "Open this search in a dedicated page"}
+            </Link>
+          )}
         </div>
       )}
     </section>

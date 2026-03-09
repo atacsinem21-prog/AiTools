@@ -1,12 +1,10 @@
-import type { MetadataRoute } from "next";
 import { categories, comparePairs, landingSlugs, tools } from "@/data/tools";
 import { getSiteUrl } from "@/lib/site-url";
 
-const baseUrl = getSiteUrl();
 const locales = ["tr", "en"] as const;
 const searchSeeds = ["ai-tools", "video-ai", "marketing-ai", "chatgpt", "compare-tools"];
 
-export default function sitemap(): MetadataRoute.Sitemap {
+function buildUrls() {
   const staticRoutes = locales.flatMap((locale) => [
     `/${locale}`,
     `/${locale}/directory`,
@@ -32,10 +30,32 @@ export default function sitemap(): MetadataRoute.Sitemap {
     searchSeeds.map((seed) => `/${locale}/search/${seed}`)
   );
 
-  return [...staticRoutes, ...categoryRoutes, ...toolRoutes, ...compareRoutes, ...searchRoutes].map((path) => ({
-    url: `${baseUrl}${path}`,
-    lastModified: new Date(),
-    changeFrequency: "daily",
-    priority: path.includes("/tool/") ? 0.8 : 0.7,
-  }));
+  return [...staticRoutes, ...categoryRoutes, ...toolRoutes, ...compareRoutes, ...searchRoutes];
+}
+
+export async function GET() {
+  const baseUrl = getSiteUrl();
+  const lastmod = new Date().toISOString();
+  const urls = buildUrls();
+
+  const body = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${urls
+  .map(
+    (path) => `<url>
+  <loc>${baseUrl}${path}</loc>
+  <lastmod>${lastmod}</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>${path.includes("/tool/") ? "0.8" : "0.7"}</priority>
+</url>`
+  )
+  .join("\n")}
+</urlset>`;
+
+  return new Response(body, {
+    headers: {
+      "Content-Type": "application/xml; charset=utf-8",
+      "Cache-Control": "public, s-maxage=600, stale-while-revalidate=86400",
+    },
+  });
 }
