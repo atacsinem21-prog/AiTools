@@ -32,28 +32,24 @@ export function getSitemapUrls() {
     searchSeeds.map((seed) => `/${locale}/search/${seed}`)
   );
 
-  return [...staticRoutes, ...categoryRoutes, ...toolRoutes, ...compareRoutes, ...searchRoutes].map(
-    (path) => ({
-      url: `${baseUrl}${path}`,
-      priority: path.includes("/tool/") ? "0.8" : "0.7",
-    })
+  // Keep category URLs first to match desired sitemap ordering.
+  return [...categoryRoutes, ...staticRoutes, ...toolRoutes, ...compareRoutes, ...searchRoutes].map(
+    (path) => `${baseUrl}${path}`
   );
 }
 
 export function toSitemapXml() {
-  const lastmod = new Date().toISOString();
+  const lastmod = new Date().toISOString().slice(0, 10);
   const urls = getSitemapUrls();
 
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${urls
   .map(
-    (entry) => `<url>
-  <loc>${entry.url}</loc>
-  <lastmod>${lastmod}</lastmod>
-  <changefreq>daily</changefreq>
-  <priority>${entry.priority}</priority>
-</url>`
+    (url) => `  <url>
+    <loc>${url}</loc>
+    <lastmod>${lastmod}</lastmod>
+  </url>`
   )
   .join("\n")}
 </urlset>`;
