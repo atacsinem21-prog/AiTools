@@ -17,6 +17,7 @@ export function ToolCard({ tool, locale }: ToolCardProps) {
           alt={`${tool.name} logo`}
           width={44}
           height={44}
+          sizes="44px"
           className="rounded-md bg-slate-800 p-1"
           loading="lazy"
         />

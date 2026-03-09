@@ -1,11 +1,29 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { comparePairs, getToolBySlug } from "@/data/tools";
+import { CompareFilterGrid } from "@/components/CompareFilterGrid";
+import { comparePairs, getToolBySlug, type Locale } from "@/data/tools";
 import { getLocaleFromPath } from "@/lib/i18n";
-import { buildMetadata } from "@/lib/seo";
+import { buildMetadata, itemListSchema } from "@/lib/seo";
+import { getSiteUrl } from "@/lib/site-url";
 
 type Props = {
   params: { locale: string };
+};
+
+type PricingModel = "free" | "freemium" | "paid";
+
+const toolPricing: Record<string, PricingModel> = {
+  chatgpt: "freemium",
+  claude: "freemium",
+  runway: "paid",
+  pika: "freemium",
+  jasper: "paid",
+  "copy-ai": "freemium",
+  "github-copilot": "paid",
+  "cursor-ai": "freemium",
+  midjourney: "paid",
+  "dalle-3": "paid",
+  "notion-ai": "freemium",
 };
 
 export function generateMetadata({ params }: Props): Metadata {
@@ -22,7 +40,29 @@ export function generateMetadata({ params }: Props): Metadata {
 }
 
 export default function CompareIndexPage({ params }: Props) {
-  const locale = getLocaleFromPath(params.locale);
+  const locale = getLocaleFromPath(params.locale) as Locale;
+  const entries = comparePairs
+    .map((pair) => {
+      const left = getToolBySlug(pair.leftToolSlug);
+      const right = getToolBySlug(pair.rightToolSlug);
+      if (!left || !right) return null;
+
+      return {
+        slug: pair.slug,
+        title: `${left.name} vs ${right.name}`,
+        leftCategory: left.category,
+        rightCategory: right.category,
+        leftPricing: toolPricing[left.slug] ?? "paid",
+        rightPricing: toolPricing[right.slug] ?? "paid",
+        score: left.trendingScore + right.trendingScore,
+      };
+    })
+    .filter((entry): entry is NonNullable<typeof entry> => Boolean(entry));
+
+  const schema = itemListSchema(
+    getSiteUrl(),
+    entries.map((entry) => ({ name: entry.title, slug: `compare/${entry.slug}` }))
+  );
 
   return (
     <section className="space-y-6">
@@ -35,24 +75,13 @@ export default function CompareIndexPage({ params }: Props) {
           : "Use comparison pages to quickly decide which tool fits your use case."}
       </p>
 
-      <div className="grid gap-3 sm:grid-cols-2">
-        {comparePairs.map((pair) => {
-          const left = getToolBySlug(pair.leftToolSlug);
-          const right = getToolBySlug(pair.rightToolSlug);
-          const title = left && right ? `${left.name} vs ${right.name}` : pair.slug;
+      <CompareFilterGrid locale={locale} entries={entries} />
 
-          return (
-            <Link
-              key={pair.slug}
-              href={`/${locale}/compare/${pair.slug}`}
-              className="rounded-xl border border-slate-800 bg-slate-900 px-4 py-3 hover:border-cyan-400"
-            >
-              <p className="font-medium text-slate-100">{title}</p>
-              <p className="mt-1 text-sm text-slate-400">{pair.slug}</p>
-            </Link>
-          );
-        })}
-      </div>
+      <Link href={`/${locale}/directory`} className="inline-block text-sm text-cyan-300 hover:text-cyan-200">
+        {locale === "tr" ? "Tüm araçlara dön" : "Back to all tools"}
+      </Link>
+
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
     </section>
   );
 }

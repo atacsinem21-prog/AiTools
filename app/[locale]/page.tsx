@@ -35,7 +35,8 @@ export function generateMetadata({ params }: Props): Metadata {
 export default function HomePage({ params }: Props) {
   const locale = getLocaleFromPath(params.locale) as Locale;
   const trending = getTrendingTools();
-  const newTools = getNewTools();
+  const trendingSlugs = new Set(trending.map((tool) => tool.slug));
+  const newTools = getNewTools().filter((tool) => !trendingSlugs.has(tool.slug));
   const schema = itemListSchema(getSiteUrl(), trending);
 
   return (
