@@ -9,6 +9,7 @@ import {
   getToolPricing,
   getToolBySlug,
   getTrendingTools,
+  landingSlugs,
 } from "@/data/tools";
 import { getComparisonContent } from "@/data/compare-content";
 import { getLocaleFromPath } from "@/lib/i18n";
@@ -91,6 +92,7 @@ export default function ComparePage({ params }: Props) {
   const related = getTrendingTools().filter(
     (tool) => tool.slug !== left.slug && tool.slug !== right.slug
   );
+  const compareGuides = landingSlugs.filter((slug) => slug.includes("best-ai") || slug.includes("vs-")).slice(0, 10);
   const pageUrl = `${getSiteUrl()}/${locale}/compare/${pair.slug}`;
 
   const articleSchema = {
@@ -311,6 +313,23 @@ export default function ComparePage({ params }: Props) {
                 {entry.slug.replaceAll("-", " ")}
               </Link>
             ))}
+        </div>
+      </section>
+
+      <section>
+        <h2 className="mb-3 text-2xl font-semibold text-slate-100">
+          {locale === "tr" ? "Karar vermeyi hizlandiran rehberler" : "Decision-focused guides"}
+        </h2>
+        <div className="flex flex-wrap gap-2">
+          {compareGuides.map((slug) => (
+            <Link
+              key={slug}
+              href={`/${locale}/${slug}`}
+              className="rounded-md border border-slate-700 px-3 py-2 text-sm text-slate-200 hover:border-cyan-400"
+            >
+              {slug.replaceAll("-", " ")}
+            </Link>
+          ))}
         </div>
       </section>
 

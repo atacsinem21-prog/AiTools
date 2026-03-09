@@ -12,6 +12,7 @@ import {
   getNewTools,
   getTrendingTools,
   getToolBySlug,
+  landingSlugs,
   type Locale,
   tools,
 } from "@/data/tools";
@@ -44,6 +45,7 @@ export default function HomePage({ params }: Props) {
   const newTools = getNewTools().filter((tool) => !trendingSlugs.has(tool.slug));
   const schema = itemListSchema(getSiteUrl(), trending);
   const adSlot = process.env.NEXT_PUBLIC_ADSENSE_HOME_SLOT ?? "0000000000";
+  const featuredGuides = landingSlugs.slice(0, 10);
 
   return (
     <div className="space-y-12">
@@ -201,6 +203,28 @@ export default function HomePage({ params }: Props) {
               </Link>
             );
           })}
+        </div>
+      </section>
+
+      <section className="rounded-2xl border border-slate-800 bg-slate-900 p-6">
+        <h2 className="mb-3 text-2xl font-semibold text-slate-100">
+          {locale === "tr" ? "Populer AI rehberleri" : "Popular AI guides"}
+        </h2>
+        <p className="mb-4 text-sm text-slate-300">
+          {locale === "tr"
+            ? "Yuksek niyetli arama sorgulari icin hazirlanan bu rehberler dogrudan karsilastirma ve arac sayfalarina baglanir."
+            : "These high-intent guides are built for search demand and connect directly to tool and comparison pages."}
+        </p>
+        <div className="flex flex-wrap gap-2">
+          {featuredGuides.map((slug) => (
+            <Link
+              key={slug}
+              href={`/${locale}/${slug}`}
+              className="rounded-md border border-slate-700 px-3 py-2 text-sm text-slate-200 hover:border-cyan-400"
+            >
+              {slug.replaceAll("-", " ")}
+            </Link>
+          ))}
         </div>
       </section>
 

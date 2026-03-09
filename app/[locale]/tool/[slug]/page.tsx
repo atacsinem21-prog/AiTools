@@ -5,7 +5,7 @@ import type { Metadata } from "next";
 import { ToolCard } from "@/components/ToolCard";
 import { getLocaleFromPath } from "@/lib/i18n";
 import { buildMetadata } from "@/lib/seo";
-import { comparePairs, getPricingText, getToolBySlug, getToolPricing, tools, type Locale } from "@/data/tools";
+import { comparePairs, getPricingText, getToolBySlug, getToolPricing, landingSlugs, tools, type Locale } from "@/data/tools";
 
 type Props = {
   params: { locale: string; slug: string };
@@ -46,6 +46,10 @@ export default function ToolDetailPage({ params }: Props) {
   const relatedCompares = comparePairs.filter(
     (pair) => pair.leftToolSlug === tool.slug || pair.rightToolSlug === tool.slug
   );
+  const categoryHint = tool.category.replaceAll("-ai", "");
+  const guideLinks = landingSlugs
+    .filter((slug) => slug.includes(categoryHint) || slug.includes(tool.slug.split("-")[0]))
+    .slice(0, 8);
   const pricingText = getPricingText(locale, tool.slug);
   const faqItems = [
     ...tool.faqs,
@@ -158,6 +162,23 @@ export default function ToolDetailPage({ params }: Props) {
               className="rounded-md border border-slate-700 px-3 py-2 text-sm text-slate-200 hover:border-cyan-400"
             >
               {pair.slug.replaceAll("-", " ")}
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <section>
+        <h2 className="mb-4 text-2xl font-semibold text-slate-100">
+          {locale === "tr" ? "Ilgili rehberler" : "Related guides"}
+        </h2>
+        <div className="flex flex-wrap gap-2">
+          {guideLinks.map((slug) => (
+            <Link
+              key={slug}
+              href={`/${locale}/${slug}`}
+              className="rounded-md border border-slate-700 px-3 py-2 text-sm text-slate-200 hover:border-cyan-400"
+            >
+              {slug.replaceAll("-", " ")}
             </Link>
           ))}
         </div>

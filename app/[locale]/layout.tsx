@@ -16,6 +16,19 @@ export default function LocaleLayout({ children, params }: Props) {
     notFound();
   }
 
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://globalaitools.com";
+  const websiteSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "Global AI Tools",
+    url: siteUrl,
+    potentialAction: {
+      "@type": "SearchAction",
+      target: `${siteUrl}/${params.locale}/search/{query}`,
+      "query-input": "required name=query",
+    },
+  };
+
   return (
     <div className="min-h-screen bg-bg">
       <IntroGate locale={params.locale} />
@@ -23,6 +36,7 @@ export default function LocaleLayout({ children, params }: Props) {
       <main className="mx-auto max-w-6xl px-4 py-10 pb-28">{children}</main>
       <Footer locale={params.locale} />
       <StickyNewsletterCta locale={params.locale} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} />
     </div>
   );
 }
