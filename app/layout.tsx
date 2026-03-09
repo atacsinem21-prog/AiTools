@@ -11,6 +11,9 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Global AI Tools",
   description: "TR/EN AI tools directory",
+  verification: {
+    google: "3-CdotgYw6E0E6Z9WepzN6iiDgxI0J8nV1bNSey5yRs",
+  },
 };
 
 export default function RootLayout({
