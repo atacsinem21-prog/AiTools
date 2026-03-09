@@ -20,7 +20,7 @@ export function buildMetadata({
   pathWithoutLocale,
 }: MetadataInput): Metadata {
   const localPath = `/${locale}${pathWithoutLocale}`;
-  const alternates = alternatesFor(pathWithoutLocale);
+  const alternates = alternatesFor(pathWithoutLocale, locale);
 
   return {
     title,
@@ -51,7 +51,9 @@ export function itemListSchema(url: string, items: Array<{ name: string; slug: s
       "@type": "ListItem",
       position: index + 1,
       name: item.name,
-      url: `${url}/tool/${item.slug}`,
+      url: item.slug.includes("/")
+        ? `${url}/${item.slug.replace(/^\/+/, "")}`
+        : `${url}/tool/${item.slug}`,
     })),
   };
 }

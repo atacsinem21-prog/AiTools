@@ -24,6 +24,13 @@ export type Tool = {
   createdAt: string;
 };
 
+export type PricingModel = "free" | "freemium" | "paid";
+
+export type ToolPricing = {
+  model: PricingModel;
+  startingAtUsdMonthly: number | null;
+};
+
 export const categories: Category[] = [
   {
     slug: "video-ai",
@@ -410,6 +417,46 @@ export const tools: Tool[] = [
     createdAt: "2026-01-26",
   },
 ];
+
+export const toolPricingBySlug: Record<string, ToolPricing> = {
+  chatgpt: { model: "freemium", startingAtUsdMonthly: 20 },
+  claude: { model: "freemium", startingAtUsdMonthly: 20 },
+  runway: { model: "paid", startingAtUsdMonthly: 15 },
+  pika: { model: "freemium", startingAtUsdMonthly: 10 },
+  jasper: { model: "paid", startingAtUsdMonthly: 39 },
+  "copy-ai": { model: "freemium", startingAtUsdMonthly: 36 },
+  "github-copilot": { model: "paid", startingAtUsdMonthly: 10 },
+  "cursor-ai": { model: "freemium", startingAtUsdMonthly: 20 },
+  midjourney: { model: "paid", startingAtUsdMonthly: 10 },
+  "dalle-3": { model: "paid", startingAtUsdMonthly: 20 },
+  "notion-ai": { model: "freemium", startingAtUsdMonthly: 10 },
+};
+
+export function getToolPricing(slug: string): ToolPricing {
+  return toolPricingBySlug[slug] ?? { model: "paid", startingAtUsdMonthly: null };
+}
+
+export function getPricingText(locale: Locale, slug: string) {
+  const pricing = getToolPricing(slug);
+  const modelLabel =
+    pricing.model === "free"
+      ? locale === "tr"
+        ? "Ucretsiz"
+        : "Free"
+      : pricing.model === "freemium"
+        ? "Freemium"
+        : locale === "tr"
+          ? "Ucretli"
+          : "Paid";
+
+  if (pricing.startingAtUsdMonthly == null || pricing.model === "free") {
+    return modelLabel;
+  }
+
+  return locale === "tr"
+    ? `${modelLabel} - ${pricing.startingAtUsdMonthly}$ / ay`
+    : `${modelLabel} - $${pricing.startingAtUsdMonthly}/mo`;
+}
 
 export const landingSlugs = [
   "best-ai-tools",

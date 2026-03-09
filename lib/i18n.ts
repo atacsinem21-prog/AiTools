@@ -29,13 +29,14 @@ export function t(locale: Locale, key: keyof typeof enCommon) {
   return value;
 }
 
-export function alternatesFor(pathWithoutLocale: string) {
+export function alternatesFor(pathWithoutLocale: string, locale: Locale = "en") {
   const cleanPath = pathWithoutLocale.startsWith("/")
     ? pathWithoutLocale
     : `/${pathWithoutLocale}`;
+  const canonical = `/${locale}${cleanPath}`;
 
   return {
-    canonical: `/en${cleanPath}`,
+    canonical,
     languages: {
       "tr-TR": `/tr${cleanPath}`,
       en: `/en${cleanPath}`,

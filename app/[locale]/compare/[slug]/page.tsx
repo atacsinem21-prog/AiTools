@@ -5,6 +5,8 @@ import { ShareButtons } from "@/components/ShareButtons";
 import {
   comparePairs,
   getComparePairBySlug,
+  getPricingText,
+  getToolPricing,
   getToolBySlug,
   getTrendingTools,
 } from "@/data/tools";
@@ -39,8 +41,8 @@ export function generateMetadata({ params }: Props): Metadata {
 
   const description =
     locale === "tr"
-      ? `${left.name} ve ${right.name} özelliklerini, kullanım senaryolarını ve bağlantılarını karşılaştırın.`
-      : `Compare features, use cases and links for ${left.name} and ${right.name}.`;
+      ? `${left.name} ve ${right.name} icin ozellik, fiyat, kullanim senaryosu ve ekip bazli onerileri karsilastirin.`
+      : `Compare pricing, features, use cases and team-fit recommendations for ${left.name} and ${right.name}.`;
 
   return buildMetadata({
     locale,
@@ -58,9 +60,20 @@ export default function ComparePage({ params }: Props) {
   const left = getToolBySlug(pair.leftToolSlug);
   const right = getToolBySlug(pair.rightToolSlug);
   if (!left || !right) notFound();
+  const leftPricingRaw = getToolPricing(left.slug);
+  const rightPricingRaw = getToolPricing(right.slug);
+  const leftPricing = getPricingText(locale, left.slug);
+  const rightPricing = getPricingText(locale, right.slug);
 
   const comparison = getComparisonContent(pair.slug);
-  const rows = comparison?.featureComparison ?? [
+  const rows = [
+    {
+      key: "pricing",
+      label: { tr: "Fiyat", en: "Pricing" },
+      left: leftPricing,
+      right: rightPricing,
+    },
+    ...(comparison?.featureComparison ?? [
     {
       key: "content",
       label: { tr: "İçerik üretimi", en: "Content production" },
@@ -73,6 +86,7 @@ export default function ComparePage({ params }: Props) {
       left: left.tags.includes("automation") ? "Strong" : "Moderate",
       right: right.tags.includes("automation") ? "Strong" : "Moderate",
     },
+    ]),
   ];
   const related = getTrendingTools().filter(
     (tool) => tool.slug !== left.slug && tool.slug !== right.slug
@@ -100,6 +114,11 @@ export default function ComparePage({ params }: Props) {
       operatingSystem: "Web",
       url: left.website,
       description: left.fullDescription[locale],
+      offers: {
+        "@type": "Offer",
+        priceCurrency: "USD",
+        ...(leftPricingRaw.startingAtUsdMonthly != null ? { price: leftPricingRaw.startingAtUsdMonthly } : {}),
+      },
     },
     {
       "@context": "https://schema.org",
@@ -109,10 +128,16 @@ export default function ComparePage({ params }: Props) {
       operatingSystem: "Web",
       url: right.website,
       description: right.fullDescription[locale],
+      offers: {
+        "@type": "Offer",
+        priceCurrency: "USD",
+        ...(rightPricingRaw.startingAtUsdMonthly != null ? { price: rightPricingRaw.startingAtUsdMonthly } : {}),
+      },
     },
   ];
 
-  const faqItems = comparison?.faqs ?? [
+  const faqItems = [
+    ...(comparison?.faqs ?? []),
     {
       question: {
         tr: `${left.name} mı ${right.name} mı daha iyi?`,
@@ -123,7 +148,27 @@ export default function ComparePage({ params }: Props) {
         en: "It depends on your workflow; one may be faster while the other can be stronger for deeper analysis.",
       },
     },
-  ];
+    {
+      question: {
+        tr: `${left.name} ve ${right.name} fiyat açısından nasıl ayrışıyor?`,
+        en: `How do ${left.name} and ${right.name} differ in pricing?`,
+      },
+      answer: {
+        tr: `${left.name}: ${leftPricing}. ${right.name}: ${rightPricing}.`,
+        en: `${left.name}: ${leftPricing}. ${right.name}: ${rightPricing}.`,
+      },
+    },
+    {
+      question: {
+        tr: "Hangi ekipler bu compare sayfasından daha çok fayda görür?",
+        en: "Which teams benefit most from this comparison page?",
+      },
+      answer: {
+        tr: "Satın alma, içerik, ürün ve operasyon ekipleri karar aşamasında özellik ve maliyet karşılaştırmasını hızlıca yapabilir.",
+        en: "Procurement, content, product and operations teams can quickly compare capability and cost before choosing a tool.",
+      },
+    },
+  ].slice(0, 3);
 
   const faqSchema = {
     "@context": "https://schema.org",
@@ -184,6 +229,17 @@ export default function ComparePage({ params }: Props) {
             (locale === "tr"
               ? `${left.name} ve ${right.name} farklı ihtiyaçlara hitap eder. Hızlı uygulama ve günlük görevler için birini, daha detaylı analiz ve uzun bağlam için diğerini tercih edebilirsiniz. Karar verirken ekip büyüklüğü, entegrasyon ihtiyacı ve aylık maliyet gibi kriterleri birlikte değerlendirmek gerekir.`
               : `${left.name} and ${right.name} serve different priorities. One can be better for speed and daily execution, while the other may be stronger for deeper analysis and long-context work. Evaluate team size, integration fit and monthly cost together before deciding.`)}
+        </p>
+      </section>
+
+      <section className="space-y-3 rounded-xl border border-slate-800 bg-slate-900 p-5">
+        <h2 className="text-2xl font-semibold text-slate-100">
+          {locale === "tr" ? "Kullanim senaryosuna gore onerilen secim" : "Recommended choice by use case"}
+        </h2>
+        <p className="text-sm text-slate-300">
+          {locale === "tr"
+            ? `${left.name} hizli icerik uretimi, gunluk operasyon ve daha cevik is akislarinda one cikabilir. ${right.name} ise uzun baglam, detayli degerlendirme ve stratejik analiz odakli kullanimlarda daha guclu olabilir.`
+            : `${left.name} can be a better fit for fast execution and high-volume daily output, while ${right.name} may be stronger for long-context analysis and strategy-heavy workflows.`}
         </p>
       </section>
 

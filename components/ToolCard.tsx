@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import type { Locale, Tool } from "@/data/tools";
+import { getPricingText, type Locale, type Tool } from "@/data/tools";
 import { t } from "@/lib/i18n";
 
 type ToolCardProps = {
@@ -30,6 +30,9 @@ export function ToolCard({ tool, locale }: ToolCardProps) {
       </div>
 
       <p className="mt-4 line-clamp-3 text-sm text-slate-300">{tool.shortDescription[locale]}</p>
+      <p className="mt-2 text-xs text-slate-400">
+        {locale === "tr" ? "Fiyat:" : "Pricing:"} {getPricingText(locale, tool.slug)}
+      </p>
 
       <div className="mt-5 flex gap-3">
         <Link

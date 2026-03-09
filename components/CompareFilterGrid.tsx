@@ -11,6 +11,8 @@ type CompareEntry = {
   rightCategory: string;
   leftPricing: "free" | "freemium" | "paid";
   rightPricing: "free" | "freemium" | "paid";
+  leftPricingText: string;
+  rightPricingText: string;
   score: number;
 };
 
@@ -108,6 +110,9 @@ export function CompareFilterGrid({
             </div>
             <p className="mt-1 text-xs text-slate-400">
               {entry.leftCategory} • {entry.rightCategory}
+            </p>
+            <p className="mt-1 text-xs text-slate-500">
+              {entry.leftPricingText} | {entry.rightPricingText}
             </p>
           </Link>
         ))}

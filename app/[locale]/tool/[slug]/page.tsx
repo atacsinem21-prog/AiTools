@@ -5,7 +5,7 @@ import type { Metadata } from "next";
 import { ToolCard } from "@/components/ToolCard";
 import { getLocaleFromPath } from "@/lib/i18n";
 import { buildMetadata } from "@/lib/seo";
-import { comparePairs, getToolBySlug, tools, type Locale } from "@/data/tools";
+import { comparePairs, getPricingText, getToolBySlug, getToolPricing, tools, type Locale } from "@/data/tools";
 
 type Props = {
   params: { locale: string; slug: string };
@@ -21,11 +21,18 @@ export function generateMetadata({ params }: Props): Metadata {
   const locale = getLocaleFromPath(params.locale);
   const tool = getToolBySlug(params.slug);
   if (!tool) return {};
+  const pricing = getPricingText(locale, tool.slug);
 
   return buildMetadata({
     locale,
-    title: `${tool.name} - ${locale === "tr" ? "AI Aracı" : "AI Tool"}`,
-    description: tool.shortDescription[locale],
+    title:
+      locale === "tr"
+        ? `${tool.name} inceleme, fiyat ve ozellikler`
+        : `${tool.name} review, pricing and features`,
+    description:
+      locale === "tr"
+        ? `${tool.name} detaylari, kullanim alanlari ve fiyat modeli: ${pricing}.`
+        : `${tool.name} use cases, key features and pricing model: ${pricing}.`,
     pathWithoutLocale: `/tool/${tool.slug}`,
   });
 }
@@ -39,6 +46,30 @@ export default function ToolDetailPage({ params }: Props) {
   const relatedCompares = comparePairs.filter(
     (pair) => pair.leftToolSlug === tool.slug || pair.rightToolSlug === tool.slug
   );
+  const pricingText = getPricingText(locale, tool.slug);
+  const faqItems = [
+    ...tool.faqs,
+    {
+      question: {
+        tr: `${tool.name} fiyat modeli nedir?`,
+        en: `What is the pricing model of ${tool.name}?`,
+      },
+      answer: {
+        tr: `${tool.name} için fiyat bilgisi: ${pricingText}.`,
+        en: `Pricing for ${tool.name}: ${pricingText}.`,
+      },
+    },
+    {
+      question: {
+        tr: `${tool.name} kimler için daha uygun?`,
+        en: `Who is ${tool.name} best for?`,
+      },
+      answer: {
+        tr: `${tool.name}, ${tool.category} kategorisinde çalışan ekipler için güçlü bir seçenektir.`,
+        en: `${tool.name} is a strong option for teams working in the ${tool.category} category.`,
+      },
+    },
+  ].slice(0, 3);
 
   const softwareSchema = {
     "@context": "https://schema.org",
@@ -48,12 +79,19 @@ export default function ToolDetailPage({ params }: Props) {
     operatingSystem: "Web",
     description: tool.fullDescription[locale],
     url: `/${locale}/tool/${tool.slug}`,
+    offers: {
+      "@type": "Offer",
+      priceCurrency: "USD",
+      ...(getToolPricing(tool.slug).startingAtUsdMonthly != null
+        ? { price: getToolPricing(tool.slug).startingAtUsdMonthly }
+        : {}),
+    },
   };
 
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: tool.faqs.map((faq) => ({
+    mainEntity: faqItems.map((faq) => ({
       "@type": "Question",
       name: faq.question[locale],
       acceptedAnswer: {
@@ -72,6 +110,7 @@ export default function ToolDetailPage({ params }: Props) {
             <h1 className="text-3xl font-bold text-slate-100">{tool.name}</h1>
             <p className="text-slate-300">{tool.fullDescription[locale]}</p>
             <p className="text-sm text-cyan-300">{tool.category}</p>
+            <p className="text-sm text-slate-300">{locale === "tr" ? "Fiyat:" : "Pricing:"} {pricingText}</p>
             <a
               href={tool.website}
               target="_blank"
@@ -98,7 +137,7 @@ export default function ToolDetailPage({ params }: Props) {
       <section>
         <h2 className="mb-4 text-2xl font-semibold text-slate-100">{locale === "tr" ? "SSS" : "FAQ"}</h2>
         <div className="space-y-3">
-          {tool.faqs.map((faq) => (
+          {faqItems.map((faq) => (
             <details key={faq.question.en} className="rounded-xl border border-slate-800 bg-slate-900 p-4">
               <summary className="cursor-pointer font-medium text-slate-100">{faq.question[locale]}</summary>
               <p className="mt-2 text-sm text-slate-300">{faq.answer[locale]}</p>

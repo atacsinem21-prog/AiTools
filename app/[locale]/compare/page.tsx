@@ -1,29 +1,13 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { CompareFilterGrid } from "@/components/CompareFilterGrid";
-import { comparePairs, getToolBySlug, type Locale } from "@/data/tools";
+import { comparePairs, getPricingText, getToolBySlug, getToolPricing, type Locale } from "@/data/tools";
 import { getLocaleFromPath } from "@/lib/i18n";
 import { buildMetadata, itemListSchema } from "@/lib/seo";
 import { getSiteUrl } from "@/lib/site-url";
 
 type Props = {
   params: { locale: string };
-};
-
-type PricingModel = "free" | "freemium" | "paid";
-
-const toolPricing: Record<string, PricingModel> = {
-  chatgpt: "freemium",
-  claude: "freemium",
-  runway: "paid",
-  pika: "freemium",
-  jasper: "paid",
-  "copy-ai": "freemium",
-  "github-copilot": "paid",
-  "cursor-ai": "freemium",
-  midjourney: "paid",
-  "dalle-3": "paid",
-  "notion-ai": "freemium",
 };
 
 export function generateMetadata({ params }: Props): Metadata {
@@ -52,8 +36,10 @@ export default function CompareIndexPage({ params }: Props) {
         title: `${left.name} vs ${right.name}`,
         leftCategory: left.category,
         rightCategory: right.category,
-        leftPricing: toolPricing[left.slug] ?? "paid",
-        rightPricing: toolPricing[right.slug] ?? "paid",
+        leftPricing: getToolPricing(left.slug).model,
+        rightPricing: getToolPricing(right.slug).model,
+        leftPricingText: getPricingText(locale, left.slug),
+        rightPricingText: getPricingText(locale, right.slug),
         score: left.trendingScore + right.trendingScore,
       };
     })
