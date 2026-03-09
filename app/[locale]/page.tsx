@@ -87,7 +87,7 @@ export default function HomePage({ params }: Props) {
                 alt="AI assistant icon"
                 width={128}
                 height={128}
-                className="relative h-24 w-24 object-contain"
+                className="relative h-44 w-44 object-contain"
                 priority
               />
             </div>
