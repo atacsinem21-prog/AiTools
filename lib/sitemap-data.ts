@@ -4,8 +4,7 @@ import { getSiteUrl } from "@/lib/site-url";
 const locales = ["tr", "en"] as const;
 const searchSeeds = ["ai-tools", "video-ai", "marketing-ai", "chatgpt", "compare-tools"];
 
-export function getSitemapUrls() {
-  const baseUrl = getSiteUrl();
+export function getSitemapUrls(baseUrl: string = getSiteUrl()) {
 
   const staticRoutes = locales.flatMap((locale) => [
     `/${locale}`,
@@ -41,6 +40,23 @@ export function getSitemapUrls() {
 export function toSitemapXml() {
   const lastmod = new Date().toISOString().slice(0, 10);
   const urls = getSitemapUrls();
+
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${urls
+  .map(
+    (url) => `  <url>
+    <loc>${url}</loc>
+    <lastmod>${lastmod}</lastmod>
+  </url>`
+  )
+  .join("\n")}
+</urlset>`;
+}
+
+export function toSitemapXmlWithBase(baseUrl: string) {
+  const lastmod = new Date().toISOString().slice(0, 10);
+  const urls = getSitemapUrls(baseUrl);
 
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
