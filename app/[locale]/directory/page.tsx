@@ -43,6 +43,13 @@ export default function DirectoryPage({ params, searchParams }: Props) {
   return (
     <div className="space-y-8">
       <h1 className="text-3xl font-bold text-slate-100">{t(locale, "directory")}</h1>
+      <section className="rounded-xl border border-slate-800 bg-slate-900 p-5">
+        <p className="text-sm leading-7 text-slate-300">
+          {locale === "tr"
+            ? "AI arac dizininde fiyat modeli, kategori uyumu ve kullanim senaryosu birlikte degerlendirilmelidir. Bu sayfa, ekiplerin tek tek arac sayfalarina gitmeden once hizli bir on eleme yapmasi icin tasarlandi. Her kartta arac tipi, fiyat sinifi ve detayli aciklama gorerek daha bilincli secim yapabilirsiniz. Ozellikle icerik, video, coding ve productivity akislari icin farkli araclarin guclu oldugu noktalar degisir. Bu nedenle once kategoriye gore filtreleyin, sonra shortlist olusturup tool detay ve compare sayfalarina gecin. Bu akis, gereksiz lisans maliyetini azaltir ve ekip icin dogru urune daha hizli ulasmanizi saglar."
+            : "In this AI tools directory, pricing model, category fit and use-case depth should be evaluated together. This page is designed to help teams create a fast shortlist before visiting each detailed tool page. Each card now highlights category, pricing signal and a richer description so selection decisions are more informed. Different tools are stronger across content, video, coding and productivity workflows, so filtering by category first is the fastest path. After filtering, move to tool detail and compare pages to validate fit, integration potential and cost. This process reduces unnecessary license spend and helps teams adopt the right product with less trial-and-error."}
+        </p>
+      </section>
 
       <div className="flex flex-wrap gap-2">
         <Link

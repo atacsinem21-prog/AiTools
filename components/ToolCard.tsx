@@ -9,6 +9,8 @@ type ToolCardProps = {
 };
 
 export function ToolCard({ tool, locale }: ToolCardProps) {
+  const pricingText = getPricingText(locale, tool.slug);
+
   return (
     <article className="flex h-full flex-col rounded-2xl border border-slate-800 bg-slate-900 p-5">
       <div className="flex items-start gap-3">
@@ -26,13 +28,16 @@ export function ToolCard({ tool, locale }: ToolCardProps) {
           <span className="mt-1 inline-block rounded-full bg-cyan-500/10 px-2 py-1 text-xs text-cyan-300">
             {tool.category}
           </span>
+          <div className="mt-2">
+            <span className="inline-block rounded-full bg-emerald-500/20 px-2 py-1 text-xs font-semibold text-emerald-300">
+              {locale === "tr" ? "Fiyat: " : "Pricing: "}
+              {pricingText}
+            </span>
+          </div>
         </div>
       </div>
 
-      <p className="mt-4 line-clamp-3 text-sm text-slate-300">{tool.shortDescription[locale]}</p>
-      <p className="mt-2 text-xs text-slate-400">
-        {locale === "tr" ? "Fiyat:" : "Pricing:"} {getPricingText(locale, tool.slug)}
-      </p>
+      <p className="mt-4 line-clamp-4 text-sm leading-6 text-slate-300">{tool.fullDescription[locale]}</p>
 
       <div className="mt-5 flex gap-3">
         <Link
