@@ -1,0 +1,39 @@
+name: Ingestion Cron
+
+on:
+  schedule:
+    - cron: "0 */6 * * *"
+  workflow_dispatch:
+
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run ingestion
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          PRODUCTHUNT_TOKEN: ${{ secrets.PRODUCTHUNT_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REDDIT_USER_AGENT: ${{ secrets.REDDIT_USER_AGENT }}
+          RSS_FEED_URLS: ${{ secrets.RSS_FEED_URLS }}
+          PRODUCTHUNT_FETCH_LIMIT: "40"
+          GITHUB_FETCH_LIMIT: "50"
+          REDDIT_FETCH_LIMIT: "40"
+          RSS_FETCH_LIMIT: "40"
+          COMPARE_TOOL_SCAN_LIMIT: "300"
+          COMPARE_PAIR_LIMIT: "500"
+        run: npm run ingest:once

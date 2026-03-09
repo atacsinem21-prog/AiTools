@@ -16,6 +16,8 @@ if (!SUPABASE_URL || !SUPABASE_KEY) {
 }
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+const TOOL_SCAN_LIMIT = Number(process.env.COMPARE_TOOL_SCAN_LIMIT ?? 300);
+const PAIR_LIMIT = Number(process.env.COMPARE_PAIR_LIMIT ?? 500);
 
 function pairSlug(left, right) {
   return `${left}-vs-${right}`;
@@ -26,7 +28,7 @@ async function run() {
     .from("tools")
     .select("slug, category, created_at")
     .order("created_at", { ascending: false })
-    .limit(120);
+    .limit(Math.max(50, TOOL_SCAN_LIMIT));
 
   if (error) throw error;
 
@@ -51,9 +53,9 @@ async function run() {
           score: Math.max(1, 100 - i - j),
           source: `auto:${category}`,
         });
-        if (pairs.length >= 200) break;
+        if (pairs.length >= Math.max(50, PAIR_LIMIT)) break;
       }
-      if (pairs.length >= 200) break;
+      if (pairs.length >= Math.max(50, PAIR_LIMIT)) break;
     }
   }
 

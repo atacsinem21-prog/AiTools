@@ -9,6 +9,10 @@ dotenv.config();
 const PRODUCTHUNT_TOKEN = process.env.PRODUCTHUNT_TOKEN;
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 const REDDIT_USER_AGENT = process.env.REDDIT_USER_AGENT ?? "global-ai-tools-bot/1.0";
+const PRODUCTHUNT_FETCH_LIMIT = Number(process.env.PRODUCTHUNT_FETCH_LIMIT ?? 40);
+const GITHUB_FETCH_LIMIT = Number(process.env.GITHUB_FETCH_LIMIT ?? 50);
+const REDDIT_FETCH_LIMIT = Number(process.env.REDDIT_FETCH_LIMIT ?? 40);
+const RSS_FETCH_LIMIT = Number(process.env.RSS_FETCH_LIMIT ?? 40);
 const RSS_FEED_URLS = (process.env.RSS_FEED_URLS ?? "")
   .split(",")
   .map((url) => url.trim())
@@ -19,7 +23,22 @@ const SUPABASE_KEY =
   process.env.SUPABASE_KEY ??
   process.env.SUPABASE_ANON_KEY;
 
-const keywords = ["ai", "artificial", "gpt", "machine learning", "llm"];
+const keywords = [
+  "ai",
+  "artificial",
+  "gpt",
+  "machine learning",
+  "llm",
+  "agent",
+  "automation",
+  "text-to-image",
+  "text-to-video",
+  "prompt",
+  "neural",
+  "copilot",
+  "chatbot",
+  "generative",
+];
 const parser = new Parser();
 
 function isAITool(text = "") {
@@ -71,7 +90,7 @@ async function fetchProductHuntPosts() {
 
   const query = `
   {
-    posts(first: 20) {
+    posts(first: ${Math.max(1, PRODUCTHUNT_FETCH_LIMIT)}) {
       edges {
         node {
           id
@@ -106,10 +125,10 @@ async function fetchGithubTools() {
   try {
     const response = await axios.get("https://api.github.com/search/repositories", {
       params: {
-        q: "topic:ai stars:>100",
+        q: "topic:ai stars:>50",
         sort: "updated",
         order: "desc",
-        per_page: 20,
+        per_page: Math.max(1, Math.min(100, GITHUB_FETCH_LIMIT)),
       },
       headers: GITHUB_TOKEN ? { Authorization: `Bearer ${GITHUB_TOKEN}` } : undefined,
       timeout: 15000,
@@ -136,13 +155,22 @@ async function fetchGithubTools() {
 }
 
 async function fetchRedditTools() {
-  const sources = ["artificial", "AItools", "machinelearning", "startups"];
+  const sources = [
+    "artificial",
+    "AItools",
+    "machinelearning",
+    "startups",
+    "OpenAI",
+    "singularity",
+    "ChatGPT",
+    "SideProject",
+  ];
   const items = [];
 
   for (const subreddit of sources) {
     try {
       const response = await axios.get(`https://www.reddit.com/r/${subreddit}/new.json`, {
-        params: { limit: 25 },
+        params: { limit: Math.max(1, Math.min(100, REDDIT_FETCH_LIMIT)) },
         headers: { "User-Agent": REDDIT_USER_AGENT },
         timeout: 15000,
       });
@@ -178,7 +206,7 @@ async function fetchRssTools() {
     try {
       const feed = await parser.parseURL(feedUrl);
       const entries = feed.items ?? [];
-      for (const entry of entries.slice(0, 25)) {
+      for (const entry of entries.slice(0, Math.max(1, RSS_FETCH_LIMIT))) {
         records.push(
           normalizeRecord(
             {

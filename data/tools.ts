@@ -516,6 +516,21 @@ export const landingSlugs = [
   "best-ai-tools-for-small-business",
   "best-ai-tools-for-video-teams",
   "best-ai-tools-for-creators",
+  "best-ai-tools-for-education",
+  "best-ai-tools-for-teachers",
+  "best-ai-tools-for-recruiters",
+  "best-ai-tools-for-hr",
+  "best-ai-tools-for-product-managers",
+  "best-ai-tools-for-ux-design",
+  "best-ai-tools-for-analytics",
+  "best-ai-tools-for-legal-teams",
+  "best-ai-tools-for-customer-support",
+  "best-ai-tools-for-finance",
+  "best-ai-tools-for-researchers",
+  "best-ai-tools-for-mobile-apps",
+  "best-ai-tools-for-saas-growth",
+  "best-ai-tools-for-b2b-marketing",
+  "best-ai-tools-for-startup-operations",
 ] as const;
 
 export function getCategoryBySlug(slug: string) {

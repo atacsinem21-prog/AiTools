@@ -15,6 +15,16 @@
   - `npm run ingest:cron`
 - Manual compare generation:
   - `npm run compares:generate`
+- Production scheduler (recommended):
+  - Enable `.github/workflows/ingestion-cron.yml`
+  - Add GitHub repo secrets:
+    - `SUPABASE_URL`
+    - `SUPABASE_SERVICE_ROLE_KEY`
+    - `PRODUCTHUNT_TOKEN`
+    - `GITHUB_TOKEN`
+    - `REDDIT_USER_AGENT`
+    - `RSS_FEED_URLS`
+  - Run once from Actions tab using `workflow_dispatch` and verify logs.
 
 ### 3) Environment variables
 - Set production envs:
@@ -50,3 +60,11 @@
 - Add internal links between tool, category and landing pages.
 - Share initial pages on Reddit, X, Indie Hackers, Hacker News.
 - Track impressions and indexing in Search Console weekly.
+- Increase content throughput:
+  - Tune ingestion limits via env vars:
+    - `PRODUCTHUNT_FETCH_LIMIT`
+    - `GITHUB_FETCH_LIMIT`
+    - `REDDIT_FETCH_LIMIT`
+    - `RSS_FETCH_LIMIT`
+    - `COMPARE_TOOL_SCAN_LIMIT`
+    - `COMPARE_PAIR_LIMIT`
