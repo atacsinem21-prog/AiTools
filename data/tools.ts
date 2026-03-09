@@ -29,7 +29,7 @@ export const categories: Category[] = [
     slug: "video-ai",
     name: { tr: "Video AI", en: "Video AI" },
     seoIntro: {
-      tr: "Video AI kategorisinde en iyi araclari karsilastir, fiyatlarini incele ve is akisini hizlandir.",
+      tr: "Video AI kategorisinde en iyi araçları karşılaştır, fiyatlarını incele ve iş akışını hızlandır.",
       en: "Discover top Video AI tools, compare features and pick the best platform for your workflow.",
     },
   },
@@ -37,7 +37,7 @@ export const categories: Category[] = [
     slug: "marketing-ai",
     name: { tr: "Marketing AI", en: "Marketing AI" },
     seoIntro: {
-      tr: "Marketing AI araclari ile kampanyalari optimize et, daha hizli icerik uret ve donusumu artir.",
+      tr: "Marketing AI araçları ile kampanyaları optimize et, daha hızlı içerik üret ve dönüşümü artır.",
       en: "Explore Marketing AI platforms to optimize campaigns, produce faster content and improve conversion.",
     },
   },
@@ -45,7 +45,7 @@ export const categories: Category[] = [
     slug: "productivity-ai",
     name: { tr: "Productivity AI", en: "Productivity AI" },
     seoIntro: {
-      tr: "Productivity AI araclari ile planlama, not alma ve otomasyon sureclerini tek yerden yonet.",
+      tr: "Productivity AI araçları ile planlama, not alma ve otomasyon süreçlerini tek yerden yönet.",
       en: "Use Productivity AI tools to improve planning, note-taking and automation in one place.",
     },
   },
@@ -53,7 +53,7 @@ export const categories: Category[] = [
     slug: "coding-ai",
     name: { tr: "Coding AI", en: "Coding AI" },
     seoIntro: {
-      tr: "Coding AI araclariyla kod inceleme, test ve dokumantasyon surecini hizlandir.",
+      tr: "Coding AI araçlarıyla kod inceleme, test ve dokümantasyon sürecini hızlandır.",
       en: "Boost development speed with Coding AI tools for code reviews, testing and documentation.",
     },
   },
@@ -61,7 +61,7 @@ export const categories: Category[] = [
     slug: "image-ai",
     name: { tr: "Image AI", en: "Image AI" },
     seoIntro: {
-      tr: "Image AI araclari ile gorsel olusturma, duzenleme ve marka varliklarini tek panelde yonet.",
+      tr: "Image AI araçları ile görsel oluşturma, düzenleme ve marka varlıklarını tek panelde yönet.",
       en: "Generate and edit visuals with Image AI tools built for creators, teams and brands.",
     },
   },
@@ -73,11 +73,11 @@ export const tools: Tool[] = [
     name: "ChatGPT",
     logo: "/logos/chatgpt.svg",
     shortDescription: {
-      tr: "Yazma, arastirma ve otomasyon icin cok amacli AI asistani.",
+      tr: "Yazma, araştırma ve otomasyon için çok amaçlı AI asistanı.",
       en: "A versatile AI assistant for writing, research and automation.",
     },
     fullDescription: {
-      tr: "ChatGPT ekiplerin icerik uretimini, veri analizini ve destek sureclerini hizlandiran genel amacli bir yapay zeka asistanidir.",
+      tr: "ChatGPT ekiplerin içerik üretimini, veri analizini ve destek süreçlerini hızlandıran genel amaçlı bir yapay zeka asistanıdır.",
       en: "ChatGPT is a general-purpose AI assistant that helps teams speed up content production, analysis and support workflows.",
     },
     category: "productivity-ai",
@@ -86,11 +86,11 @@ export const tools: Tool[] = [
     faqs: [
       {
         question: {
-          tr: "ChatGPT hangi kullanim senaryolari icin uygundur?",
+          tr: "ChatGPT hangi kullanım senaryoları için uygundur?",
           en: "What use cases is ChatGPT good for?",
         },
         answer: {
-          tr: "Icerik yazimi, fikir uretimi, teknik dokumantasyon ve musteri destek akislari icin uygundur.",
+          tr: "İçerik yazımı, fikir üretimi, teknik dokümantasyon ve müşteri destek akışları için uygundur.",
           en: "It works well for content writing, ideation, technical docs and customer support flows.",
         },
       },
@@ -104,11 +104,11 @@ export const tools: Tool[] = [
     name: "Claude",
     logo: "/logos/claude.svg",
     shortDescription: {
-      tr: "Uzun metinler ve analiz odakli gelismis yapay zeka asistani.",
+      tr: "Uzun metinler ve analiz odaklı gelişmiş yapay zeka asistanı.",
       en: "Advanced AI assistant focused on long-form reasoning and analysis.",
     },
     fullDescription: {
-      tr: "Claude ozellikle uzun dokumanlar, stratejik analiz ve guvenli kurumsal kullanim icin tercih edilir.",
+      tr: "Claude özellikle uzun dokümanlar, stratejik analiz ve güvenli kurumsal kullanım için tercih edilir.",
       en: "Claude is commonly used for long documents, strategic analysis and safer enterprise usage.",
     },
     category: "productivity-ai",
@@ -117,11 +117,11 @@ export const tools: Tool[] = [
     faqs: [
       {
         question: {
-          tr: "Claude ile ChatGPT arasindaki fark nedir?",
+          tr: "Claude ile ChatGPT arasındaki fark nedir?",
           en: "How does Claude differ from ChatGPT?",
         },
         answer: {
-          tr: "Genellikle uzun baglam ve detayli analiz performansinda one cikar.",
+          tr: "Genellikle uzun bağlam ve detaylı analiz performansında öne çıkar.",
           en: "It often stands out for long-context handling and in-depth analysis.",
         },
       },
@@ -135,11 +135,11 @@ export const tools: Tool[] = [
     name: "Runway",
     logo: "/logos/runway.svg",
     shortDescription: {
-      tr: "Video olusturma ve duzenleme icin uretilmis AI platformu.",
+      tr: "Video oluşturma ve düzenleme için üretilmiş AI platformu.",
       en: "AI-native platform for video creation and editing.",
     },
     fullDescription: {
-      tr: "Runway metinden videoya, sahne duzenleme ve post-production adimlarini hizlandirir.",
+      tr: "Runway metinden videoya, sahne düzenleme ve post-production adımlarını hızlandırır.",
       en: "Runway accelerates text-to-video generation, scene editing and post-production workflows.",
     },
     category: "video-ai",
@@ -148,11 +148,11 @@ export const tools: Tool[] = [
     faqs: [
       {
         question: {
-          tr: "Runway hangi ekipler icin uygun?",
+          tr: "Runway hangi ekipler için uygun?",
           en: "Who should use Runway?",
         },
         answer: {
-          tr: "Icerik ekipleri, reklam ajanslari ve creator ekipleri icin idealdir.",
+          tr: "İçerik ekipleri, reklam ajansları ve creator ekipleri için idealdir.",
           en: "Great for content teams, agencies and creators producing visual assets.",
         },
       },
@@ -166,11 +166,11 @@ export const tools: Tool[] = [
     name: "Pika",
     logo: "/logos/pika.svg",
     shortDescription: {
-      tr: "Hizli sosyal medya videolari icin AI video uretec.",
+      tr: "Hızlı sosyal medya videoları için AI video üretici.",
       en: "Fast AI video generator for social content.",
     },
     fullDescription: {
-      tr: "Pika kisa formatli videolar, reklam varyasyonlari ve hareketli gorseller uretmek icin kullanilir.",
+      tr: "Pika kısa formatlı videolar, reklam varyasyonları ve hareketli görseller üretmek için kullanılır.",
       en: "Pika helps generate short-form videos, ad variants and motion creatives quickly.",
     },
     category: "video-ai",
@@ -179,11 +179,11 @@ export const tools: Tool[] = [
     faqs: [
       {
         question: {
-          tr: "Pika profesyonel projelerde kullanilir mi?",
+          tr: "Pika profesyonel projelerde kullanılır mı?",
           en: "Can Pika be used in professional projects?",
         },
         answer: {
-          tr: "Evet, hizli prototip ve kampanya testlerinde oldukca etkilidir.",
+          tr: "Evet, hızlı prototip ve kampanya testlerinde oldukça etkilidir.",
           en: "Yes, it is effective for rapid prototyping and campaign experiments.",
         },
       },
@@ -197,11 +197,11 @@ export const tools: Tool[] = [
     name: "Jasper",
     logo: "/logos/jasper.svg",
     shortDescription: {
-      tr: "Marka tonu odakli AI icerik ve pazarlama platformu.",
+      tr: "Marka tonu odaklı AI içerik ve pazarlama platformu.",
       en: "Brand-focused AI content and marketing platform.",
     },
     fullDescription: {
-      tr: "Jasper ekiplerin blog, reklam metni ve landing page iceriklerini marka diline uygun bicimde olusturur.",
+      tr: "Jasper ekiplerin blog, reklam metni ve landing page içeriklerini marka diline uygun biçimde oluşturur.",
       en: "Jasper helps teams create blog, ad and landing page copy aligned with brand voice.",
     },
     category: "marketing-ai",
@@ -214,7 +214,7 @@ export const tools: Tool[] = [
           en: "Is Jasper good for SEO copy?",
         },
         answer: {
-          tr: "Anahtar kelime odakli metin taslaklari olusturmada gucludur.",
+          tr: "Anahtar kelime odaklı metin taslakları oluşturmada güçlüdür.",
           en: "It is strong at drafting keyword-focused SEO content.",
         },
       },
@@ -228,11 +228,11 @@ export const tools: Tool[] = [
     name: "Copy.ai",
     logo: "/logos/copyai.svg",
     shortDescription: {
-      tr: "Pazarlama icerik akislari ve mesajlasma otomasyonu.",
+      tr: "Pazarlama içerik akışları ve mesajlaşma otomasyonu.",
       en: "Marketing workflows and messaging automation with AI.",
     },
     fullDescription: {
-      tr: "Copy.ai email, sosyal medya ve satis metinlerinde hizli varyasyonlar ureterek ekiplerin kapasitesini artirir.",
+      tr: "Copy.ai email, sosyal medya ve satış metinlerinde hızlı varyasyonlar üreterek ekiplerin kapasitesini artırır.",
       en: "Copy.ai scales marketing output by generating variants for emails, social and sales messaging.",
     },
     category: "marketing-ai",
@@ -241,11 +241,11 @@ export const tools: Tool[] = [
     faqs: [
       {
         question: {
-          tr: "Copy.ai kimler icin uygun?",
+          tr: "Copy.ai kimler için uygun?",
           en: "Who should use Copy.ai?",
         },
         answer: {
-          tr: "Growth, satis ve pazarlama ekipleri icin uygundur.",
+          tr: "Growth, satış ve pazarlama ekipleri için uygundur.",
           en: "Great fit for growth, sales and marketing teams.",
         },
       },
@@ -259,11 +259,11 @@ export const tools: Tool[] = [
     name: "GitHub Copilot",
     logo: "/logos/copilot.svg",
     shortDescription: {
-      tr: "Kod tamamlama, test ve dokumantasyon icin coding AI.",
+      tr: "Kod tamamlama, test ve dokümantasyon için coding AI.",
       en: "Coding AI assistant for completion, tests and docs.",
     },
     fullDescription: {
-      tr: "Copilot gelistiricilerin kod yazma hizini artirir ve tekrarlayan gorevleri azaltir.",
+      tr: "Copilot geliştiricilerin kod yazma hızını artırır ve tekrarlayan görevleri azaltır.",
       en: "Copilot boosts developer velocity and reduces repetitive coding tasks.",
     },
     category: "coding-ai",
@@ -272,11 +272,11 @@ export const tools: Tool[] = [
     faqs: [
       {
         question: {
-          tr: "Copilot hangi IDE'lerde calisir?",
+          tr: "Copilot hangi IDE'lerde çalışır?",
           en: "Which IDEs support Copilot?",
         },
         answer: {
-          tr: "VS Code ve diger populer IDE'lerde eklenti olarak kullanilir.",
+          tr: "VS Code ve diğer popüler IDE'lerde eklenti olarak kullanılır.",
           en: "It runs as an extension in VS Code and other popular IDEs.",
         },
       },
@@ -290,11 +290,11 @@ export const tools: Tool[] = [
     name: "Cursor",
     logo: "/logos/cursor.svg",
     shortDescription: {
-      tr: "Kod tabanini anlayan editor icinde AI yardimcisi.",
+      tr: "Kod tabanını anlayan editör içinde AI yardımcısı.",
       en: "IDE-native AI assistant that understands your codebase.",
     },
     fullDescription: {
-      tr: "Cursor, kod tabanina baglamsal olarak hakim olup hizli refactor ve debug akislari sunar.",
+      tr: "Cursor, kod tabanına bağlamsal olarak hakim olup hızlı refactor ve debug akışları sunar.",
       en: "Cursor provides contextual refactoring and debugging workflows inside your editor.",
     },
     category: "coding-ai",
@@ -303,11 +303,11 @@ export const tools: Tool[] = [
     faqs: [
       {
         question: {
-          tr: "Cursor ekip kullanimina uygun mu?",
+          tr: "Cursor ekip kullanımına uygun mu?",
           en: "Is Cursor suitable for teams?",
         },
         answer: {
-          tr: "Evet, ozellikle hizli prototipleme ve bakim sureclerinde verimlidir.",
+          tr: "Evet, özellikle hızlı prototipleme ve bakım süreçlerinde verimlidir.",
           en: "Yes, especially useful for rapid prototyping and maintenance tasks.",
         },
       },
@@ -321,11 +321,11 @@ export const tools: Tool[] = [
     name: "Midjourney",
     logo: "/logos/midjourney.svg",
     shortDescription: {
-      tr: "Yaratıcı gorseller icin yuksek kaliteli image AI.",
+      tr: "Yaratıcı görseller için yüksek kaliteli image AI.",
       en: "High-quality image AI for creative visuals.",
     },
     fullDescription: {
-      tr: "Midjourney kampanya gorselleri, konsept tasarimlari ve ilham panolari icin yaygin sekilde kullanilir.",
+      tr: "Midjourney kampanya görselleri, konsept tasarımları ve ilham panoları için yaygın şekilde kullanılır.",
       en: "Midjourney is widely used for campaign visuals, concept art and creative exploration.",
     },
     category: "image-ai",
@@ -334,11 +334,11 @@ export const tools: Tool[] = [
     faqs: [
       {
         question: {
-          tr: "Midjourney ticari kullanim icin uygun mu?",
+          tr: "Midjourney ticari kullanım için uygun mu?",
           en: "Can Midjourney be used commercially?",
         },
         answer: {
-          tr: "Paket ve lisans sartlarina gore ticari kullanim mumkundur.",
+          tr: "Paket ve lisans şartlarına göre ticari kullanım mümkündür.",
           en: "Commercial use is possible depending on your plan and license terms.",
         },
       },
@@ -352,11 +352,11 @@ export const tools: Tool[] = [
     name: "DALL-E 3",
     logo: "/logos/dalle.svg",
     shortDescription: {
-      tr: "Metinden gorsele hizli uretim yapan image AI modeli.",
+      tr: "Metinden görsele hızlı üretim yapan image AI modeli.",
       en: "Text-to-image model for rapid visual generation.",
     },
     fullDescription: {
-      tr: "DALL-E 3 marka gorselleri, sunum varliklari ve sosyal medya kreatifleri uretmek icin kullanilir.",
+      tr: "DALL-E 3 marka görselleri, sunum varlıkları ve sosyal medya kreatifleri üretmek için kullanılır.",
       en: "DALL-E 3 is used for brand assets, presentation visuals and social media creative work.",
     },
     category: "image-ai",
@@ -365,11 +365,11 @@ export const tools: Tool[] = [
     faqs: [
       {
         question: {
-          tr: "DALL-E 3 ne kadar hizli?",
+          tr: "DALL-E 3 ne kadar hızlı?",
           en: "How fast is DALL-E 3?",
         },
         answer: {
-          tr: "Prompt karmasikligina gore saniyeler icinde sonuc uretebilir.",
+          tr: "Prompt karmaşıklığına göre saniyeler içinde sonuç üretebilir.",
           en: "It usually generates outputs in seconds, depending on prompt complexity.",
         },
       },
@@ -383,11 +383,11 @@ export const tools: Tool[] = [
     name: "Notion AI",
     logo: "/logos/notion.svg",
     shortDescription: {
-      tr: "Not alma ve bilgi yonetimini AI ile hizlandirir.",
+      tr: "Not alma ve bilgi yönetimini AI ile hızlandırır.",
       en: "Speeds up note-taking and knowledge workflows with AI.",
     },
     fullDescription: {
-      tr: "Notion AI toplanti notlari, wiki sayfalari ve gorev yonetimi iceriklerinde ekip verimliligini artirir.",
+      tr: "Notion AI toplantı notları, wiki sayfaları ve görev yönetimi içeriklerinde ekip verimliliğini artırır.",
       en: "Notion AI improves team productivity across notes, wikis and task documentation.",
     },
     category: "productivity-ai",
@@ -400,7 +400,7 @@ export const tools: Tool[] = [
           en: "Which teams benefit most from Notion AI?",
         },
         answer: {
-          tr: "Operasyon, urun ve proje ekipleri icin oldukca kullanislidir.",
+          tr: "Operasyon, ürün ve proje ekipleri için oldukça kullanışlıdır.",
           en: "It is very useful for operations, product and project teams.",
         },
       },

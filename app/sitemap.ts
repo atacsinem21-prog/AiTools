@@ -10,6 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     `/${locale}`,
     `/${locale}/directory`,
     `/${locale}/ai-tools`,
+    `/${locale}/compare`,
     `/${locale}/submit-tool`,
     ...landingSlugs.map((slug) => `/${locale}/${slug}`),
   ]);

@@ -24,7 +24,7 @@ export function generateMetadata({ params }: Props): Metadata {
 
   return buildMetadata({
     locale,
-    title: `${tool.name} - ${locale === "tr" ? "AI Araci" : "AI Tool"}`,
+    title: `${tool.name} - ${locale === "tr" ? "AI Aracı" : "AI Tool"}`,
     description: tool.shortDescription[locale],
     pathWithoutLocale: `/tool/${tool.slug}`,
   });
@@ -86,7 +86,7 @@ export default function ToolDetailPage({ params }: Props) {
 
       <section>
         <h2 className="mb-4 text-2xl font-semibold text-slate-100">
-          {locale === "tr" ? "Benzer Araclar" : "Related Tools"}
+          {locale === "tr" ? "Benzer Araçlar" : "Related Tools"}
         </h2>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {relatedTools.map((relatedTool) => (
@@ -109,7 +109,7 @@ export default function ToolDetailPage({ params }: Props) {
 
       <section>
         <h2 className="mb-4 text-2xl font-semibold text-slate-100">
-          {locale === "tr" ? "Karsilastirma sayfalari" : "Comparison pages"}
+          {locale === "tr" ? "Karşılaştırma sayfaları" : "Comparison pages"}
         </h2>
         <div className="flex flex-wrap gap-2">
           {relatedCompares.map((pair) => (
@@ -125,7 +125,7 @@ export default function ToolDetailPage({ params }: Props) {
       </section>
 
       <Link href={`/${locale}/ai-tools/${tool.category}`} className="inline-block text-cyan-300 hover:text-cyan-200">
-        {locale === "tr" ? "Kategoriye don" : "Back to category"}
+        {locale === "tr" ? "Kategoriye dön" : "Back to category"}
       </Link>
 
       <script

@@ -17,6 +17,9 @@ export function Navbar({ locale }: NavbarProps) {
           <Link href={`/${locale}/directory`} className="hover:text-cyan-300">
             {t(locale, "directory")}
           </Link>
+          <Link href={`/${locale}/compare`} className="hover:text-cyan-300">
+            Compare
+          </Link>
           <Link href={`/${locale}/submit-tool`} className="hover:text-cyan-300">
             {t(locale, "submit")}
           </Link>

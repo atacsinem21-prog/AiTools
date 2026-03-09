@@ -1,15 +1,15 @@
 {
-  "siteName": "Global AI Araclari",
-  "homeTitle": "Trend AI araclarini kesfet",
-  "homeSubtitle": "En iyi AI startup'lari incele, ozellikleri karsilastir ve is akisin icin dogru araci bul.",
-  "trending": "Trend AI araclari",
-  "newTools": "Yeni AI araclari",
+  "siteName": "Global AI Araçları",
+  "homeTitle": "Trend AI araçlarını keşfet",
+  "homeSubtitle": "En iyi AI startup'ları incele, özellikleri karşılaştır ve iş akışın için doğru aracı bul.",
+  "trending": "Trend AI araçları",
+  "newTools": "Yeni AI araçları",
   "categories": "Kategoriler",
-  "searchPlaceholder": "Arac, kategori veya etiket ara...",
-  "directory": "Tum AI araclari",
-  "submit": "AI aracini gonder",
-  "relatedTools": "Benzer araclar",
+  "searchPlaceholder": "Araç, kategori veya etiket ara...",
+  "directory": "Tüm AI araçları",
+  "submit": "AI aracını gönder",
+  "relatedTools": "Benzer araçlar",
   "faq": "SSS",
   "visitWebsite": "Siteyi Ziyaret Et",
-  "noResults": "Bu arama icin arac bulunamadi."
+  "noResults": "Bu arama için araç bulunamadı."
 }

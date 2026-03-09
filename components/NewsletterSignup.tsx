@@ -6,11 +6,11 @@ export function NewsletterSignup({ locale }: NewsletterSignupProps) {
   return (
     <section className="rounded-2xl border border-slate-800 bg-slate-900 p-6">
       <h2 className="text-2xl font-semibold text-slate-100">
-        {locale === "tr" ? "Haftalik trend bulteni" : "Weekly trend newsletter"}
+        {locale === "tr" ? "Haftalık trend bülteni" : "Weekly trend newsletter"}
       </h2>
       <p className="mt-2 text-sm text-slate-300">
         {locale === "tr"
-          ? "Yeni AI araclari ve compare guncellemelerini e-posta ile al."
+          ? "Yeni AI araçları ve compare güncellemelerini e-posta ile al."
           : "Get weekly updates for new tools and comparison pages."}
       </p>
       <form action="/api/subscribe" method="post" className="mt-4 flex flex-col gap-3 sm:flex-row">

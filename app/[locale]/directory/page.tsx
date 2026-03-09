@@ -16,10 +16,10 @@ export function generateMetadata({ params }: Props): Metadata {
   const locale = getLocaleFromPath(params.locale);
   return buildMetadata({
     locale,
-    title: locale === "tr" ? "Tum AI Araclari" : "All AI Tools Directory",
+    title: locale === "tr" ? "Tüm AI Araçları" : "All AI Tools Directory",
     description:
       locale === "tr"
-        ? "AI araclarini kategoriye gore filtreleyin ve sayfalandirilmis listede inceleyin."
+        ? "AI araçlarını kategoriye göre filtreleyin ve sayfalandırılmış listede inceleyin."
         : "Browse all AI tools with category filters and pagination.",
     pathWithoutLocale: "/directory",
   });

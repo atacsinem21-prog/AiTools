@@ -29,7 +29,7 @@ export function generateMetadata({ params }: Props): Metadata {
     locale,
     title:
       locale === "tr"
-        ? `${category.name.tr} Araclari`
+        ? `${category.name.tr} Araçları`
         : `${category.name.en} Tools`,
     description: category.seoIntro[locale],
     pathWithoutLocale: `/ai-tools/${params.category}`,

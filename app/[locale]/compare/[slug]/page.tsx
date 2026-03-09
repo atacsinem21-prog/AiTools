@@ -43,12 +43,12 @@ export function generateMetadata({ params }: Props): Metadata {
 
   const title =
     locale === "tr"
-      ? `${left.name} vs ${right.name}: Hangi AI Araci Daha Iyi? (2026)`
+      ? `${left.name} vs ${right.name}: Hangi AI Aracı Daha İyi? (2026)`
       : `${left.name} vs ${right.name}: Which AI Tool Is Better? (2026)`;
 
   const description =
     locale === "tr"
-      ? `${left.name} ve ${right.name} ozelliklerini, kullanim senaryolarini ve baglantilarini karsilastirin.`
+      ? `${left.name} ve ${right.name} özelliklerini, kullanım senaryolarını ve bağlantılarını karşılaştırın.`
       : `Compare features, use cases and links for ${left.name} and ${right.name}.`;
 
   return buildMetadata({
@@ -95,7 +95,7 @@ export default function ComparePage({ params }: Props) {
         </h1>
         <p className="max-w-3xl text-slate-300">
           {locale === "tr"
-            ? "Ozellik, kullanim alani ve yonlendirme acisindan hizli karsilastirma."
+            ? "Özellik, kullanım alanı ve yönlendirme açısından hızlı karşılaştırma."
             : "A quick side-by-side comparison of features, use cases and links."}
         </p>
         <ShareButtons title={`${left.name} vs ${right.name}`} url={pageUrl} />
@@ -166,7 +166,7 @@ export default function ComparePage({ params }: Props) {
 
       <section>
         <h2 className="mb-3 text-2xl font-semibold text-slate-100">
-          {locale === "tr" ? "Diger compare sayfalari" : "More comparisons"}
+          {locale === "tr" ? "Diğer compare sayfaları" : "More comparisons"}
         </h2>
         <div className="flex flex-wrap gap-2">
           {comparePairs

@@ -1,11 +1,21 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { CategoryCard } from "@/components/CategoryCard";
 import { NewsletterSignup } from "@/components/NewsletterSignup";
 import { SearchBar } from "@/components/SearchBar";
 import { ToolCard } from "@/components/ToolCard";
-import { categories, getNewTools, getTrendingTools, type Locale, tools } from "@/data/tools";
+import {
+  categories,
+  comparePairs,
+  getNewTools,
+  getTrendingTools,
+  getToolBySlug,
+  type Locale,
+  tools,
+} from "@/data/tools";
 import { getLocaleFromPath, t } from "@/lib/i18n";
 import { buildMetadata, itemListSchema } from "@/lib/seo";
+import { getSiteUrl } from "@/lib/site-url";
 
 type Props = { params: { locale: string } };
 
@@ -13,10 +23,10 @@ export function generateMetadata({ params }: Props): Metadata {
   const locale = getLocaleFromPath(params.locale);
   return buildMetadata({
     locale,
-    title: locale === "tr" ? "Trend AI Araclari" : "Trending AI Tools",
+    title: locale === "tr" ? "Trend AI Araçları" : "Trending AI Tools",
     description:
       locale === "tr"
-        ? "En trend ve yeni AI araclarini kesfedin, kategorilere gore filtreleyin."
+        ? "En trend ve yeni AI araçlarını keşfedin, kategorilere göre filtreleyin."
         : "Discover trending and new AI tools, filter by category and explore details.",
     pathWithoutLocale: "/",
   });
@@ -26,7 +36,7 @@ export default function HomePage({ params }: Props) {
   const locale = getLocaleFromPath(params.locale) as Locale;
   const trending = getTrendingTools();
   const newTools = getNewTools();
-  const schema = itemListSchema(process.env.NEXT_PUBLIC_SITE_URL ?? "https://example.com", trending);
+  const schema = itemListSchema(getSiteUrl(), trending);
 
   return (
     <div className="space-y-12">
@@ -62,6 +72,34 @@ export default function HomePage({ params }: Props) {
           {categories.map((category) => (
             <CategoryCard key={category.slug} category={category} locale={locale} />
           ))}
+        </div>
+      </section>
+
+      <section>
+        <div className="mb-4 flex items-center justify-between">
+          <h2 className="text-2xl font-semibold text-slate-100">
+            {locale === "tr" ? "Popüler compare sayfaları" : "Popular compare pages"}
+          </h2>
+          <Link href={`/${locale}/compare`} className="text-sm text-cyan-300 hover:text-cyan-200">
+            {locale === "tr" ? "Tumunu gor" : "View all"}
+          </Link>
+        </div>
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {comparePairs.map((pair) => {
+            const left = getToolBySlug(pair.leftToolSlug);
+            const right = getToolBySlug(pair.rightToolSlug);
+            const title = left && right ? `${left.name} vs ${right.name}` : pair.slug;
+            return (
+              <Link
+                key={pair.slug}
+                href={`/${locale}/compare/${pair.slug}`}
+                className="rounded-xl border border-slate-800 bg-slate-900 px-4 py-3 hover:border-cyan-400"
+              >
+                <p className="font-medium text-slate-100">{title}</p>
+                <p className="mt-1 text-sm text-slate-400">{pair.slug}</p>
+              </Link>
+            );
+          })}
         </div>
       </section>
 

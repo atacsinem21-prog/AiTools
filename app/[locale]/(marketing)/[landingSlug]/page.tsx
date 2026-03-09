@@ -31,7 +31,7 @@ export function generateMetadata({ params }: Props): Metadata {
     title: locale === "tr" ? `${titleText} rehberi` : `${titleText} guide`,
     description:
       locale === "tr"
-        ? `${titleText} sayfasinda en iyi AI araclarini ve kategori baglantilarini bulabilirsin.`
+        ? `${titleText} sayfasında en iyi AI araçlarını ve kategori bağlantılarını bulabilirsin.`
         : `Explore the best AI tools and internal category links for ${titleText}.`,
     pathWithoutLocale: `/${params.landingSlug}`,
   });
@@ -52,7 +52,7 @@ export default function LandingPage({ params }: Props) {
       <h1 className="text-3xl font-bold text-slate-100">{title}</h1>
       <p className="max-w-3xl text-slate-300">
         {locale === "tr"
-          ? `${title} odakli bu landing page, Google indexleme ve internal linking gucunu artirmak icin optimize edildi.`
+          ? `${title} odaklı bu landing page, Google indexleme ve internal linking gücünü artırmak için optimize edildi.`
           : `This landing page is optimized for indexation and internal linking around ${title}.`}
       </p>
 
@@ -87,7 +87,7 @@ export default function LandingPage({ params }: Props) {
 
       <section>
         <h2 className="mb-3 text-2xl font-semibold text-slate-100">
-          {locale === "tr" ? "Karsilastirma sayfalari" : "Comparison pages"}
+          {locale === "tr" ? "Karşılaştırma sayfaları" : "Comparison pages"}
         </h2>
         <div className="flex flex-wrap gap-2">
           {comparePairs.map((pair) => (
