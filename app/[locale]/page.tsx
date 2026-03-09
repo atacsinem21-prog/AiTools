@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { CategoryCard } from "@/components/CategoryCard";
 import { NewsletterSignup } from "@/components/NewsletterSignup";
@@ -81,7 +82,14 @@ export default function HomePage({ params }: Props) {
             <div className="relative flex min-h-[240px] items-center justify-center">
               <div className="absolute h-40 w-40 rounded-full bg-indigo-500/30 blur-2xl" />
               <div className="absolute h-32 w-32 rounded-full bg-cyan-400/25 blur-2xl" />
-              <span className="text-7xl">🧠</span>
+              <Image
+                src="/logos/chatgpt-card.png"
+                alt="AI assistant icon"
+                width={128}
+                height={128}
+                className="relative h-24 w-24 object-contain"
+                priority
+              />
             </div>
             <p className="relative text-center text-sm text-slate-300">
               {locale === "tr"
