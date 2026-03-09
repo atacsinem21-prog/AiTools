@@ -85,9 +85,9 @@ export default function HomePage({ params }: Props) {
               <Image
                 src="/logos/chatgpt-card.png"
                 alt="AI assistant icon"
-                width={360}
-                height={360}
-                className="relative h-72 w-72 object-contain"
+                width={338}
+                height={338}
+                className="relative h-[338px] w-[338px] object-contain"
                 priority
               />
             </div>
