@@ -1,0 +1,36 @@
+{
+  "name": "tr-en-global-site",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "ingest:once": "node ingestion/fetch-tools.mjs && node ingestion/generate-compares.mjs",
+    "ingest:cron": "node ingestion/cron.mjs",
+    "compares:generate": "node ingestion/generate-compares.mjs",
+    "verify:rls": "node ingestion/verify-rls.mjs"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.50.3",
+    "axios": "^1.12.2",
+    "dotenv": "^17.2.2",
+    "next": "14.2.32",
+    "node-cron": "^4.2.1",
+    "rss-parser": "^3.13.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "autoprefixer": "^10.4.21",
+    "eslint": "^8.57.1",
+    "eslint-config-next": "14.2.32",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5"
+  }
+}
