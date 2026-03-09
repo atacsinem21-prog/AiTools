@@ -59,6 +59,7 @@ export default function HomePage({ params }: Props) {
   const newTools = getNewTools().filter((tool) => !trendingSlugs.has(tool.slug));
   const schema = itemListSchema(getSiteUrl(), trending);
   const adSlot = process.env.NEXT_PUBLIC_ADSENSE_HOME_SLOT ?? "0000000000";
+  const showAdsSection = Boolean(process.env.NEXT_PUBLIC_ADSENSE_CLIENT);
   const featuredGuides = landingSlugs.slice(0, 10);
 
   return (
@@ -142,21 +143,23 @@ export default function HomePage({ params }: Props) {
         </p>
       </section>
 
-      <section className="space-y-3 rounded-2xl border border-slate-800 bg-slate-900/70 p-6">
-        <h2 className="text-2xl font-semibold text-slate-100">
-          {locale === "tr" ? "Sponsorlu alan" : "Sponsored placement"}
-        </h2>
-        <p className="text-sm text-slate-300">
-          {locale === "tr"
-            ? "Bu alanda Google Ads sponsor içerikleri gösterilir."
-            : "Google Ads sponsored placements appear in this section."}
-        </p>
-        <AdSlot
-          slot={adSlot}
-          className="glass-card rounded-2xl border border-slate-800 p-3"
-          format="horizontal"
-        />
-      </section>
+      {showAdsSection ? (
+        <section className="space-y-3 rounded-2xl border border-slate-800 bg-slate-900/70 p-6">
+          <h2 className="text-2xl font-semibold text-slate-100">
+            {locale === "tr" ? "Sponsorlu alan" : "Sponsored placement"}
+          </h2>
+          <p className="text-sm text-slate-300">
+            {locale === "tr"
+              ? "Bu alanda Google Ads sponsor içerikleri gösterilir."
+              : "Google Ads sponsored placements appear in this section."}
+          </p>
+          <AdSlot
+            slot={adSlot}
+            className="glass-card rounded-2xl border border-slate-800 p-3"
+            format="horizontal"
+          />
+        </section>
+      ) : null}
 
       <section>
         <h2 className="mb-4 text-2xl font-semibold text-slate-100">
