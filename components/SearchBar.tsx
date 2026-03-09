@@ -10,9 +10,11 @@ import { ToolCard } from "@/components/ToolCard";
 type SearchBarProps = {
   tools: Tool[];
   locale: Locale;
+  showInlineResults?: boolean;
+  heroMode?: boolean;
 };
 
-export function SearchBar({ tools, locale }: SearchBarProps) {
+export function SearchBar({ tools, locale, showInlineResults = true, heroMode = false }: SearchBarProps) {
   const router = useRouter();
   const [query, setQuery] = useState("");
 
@@ -36,7 +38,7 @@ export function SearchBar({ tools, locale }: SearchBarProps) {
   return (
     <section className="space-y-6">
       <form
-        className="flex flex-col gap-2 sm:flex-row"
+        className="flex flex-col gap-3 sm:flex-row"
         onSubmit={(event) => {
           event.preventDefault();
           const normalized = query.trim().toLowerCase().replaceAll(/\s+/g, "-");
@@ -49,18 +51,22 @@ export function SearchBar({ tools, locale }: SearchBarProps) {
           value={query}
           onChange={(event) => setQuery(event.target.value)}
           placeholder={t(locale, "searchPlaceholder")}
-          className="w-full rounded-xl border border-slate-700 bg-slate-900 px-4 py-3 text-slate-100 placeholder:text-slate-500 focus:border-cyan-400 focus:outline-none"
+          className={`w-full rounded-2xl border border-slate-600 bg-slate-900/80 text-slate-100 placeholder:text-slate-500 focus:border-cyan-400 focus:outline-none ${
+            heroMode ? "px-5 py-4 text-base" : "px-4 py-3"
+          }`}
           aria-label={t(locale, "searchPlaceholder")}
         />
         <button
           type="submit"
-          className="rounded-xl bg-cyan-500 px-5 py-3 text-sm font-medium text-slate-950 hover:bg-cyan-400"
+          className={`rounded-2xl bg-gradient-to-r from-cyan-400 to-indigo-400 font-semibold text-slate-950 hover:from-cyan-300 hover:to-indigo-300 ${
+            heroMode ? "px-6 py-4 text-sm" : "px-5 py-3 text-sm"
+          }`}
         >
           {locale === "tr" ? "SEO Arama Sayfası" : "Open SEO Search Page"}
         </button>
       </form>
 
-      {filtered.length === 0 ? (
+      {!showInlineResults ? null : filtered.length === 0 ? (
         <p className="text-sm text-slate-400">{t(locale, "noResults")}</p>
       ) : (
         <div className="space-y-3">

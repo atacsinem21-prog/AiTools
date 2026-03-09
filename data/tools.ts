@@ -458,6 +458,13 @@ export function getPricingText(locale: Locale, slug: string) {
     : `${modelLabel} - $${pricing.startingAtUsdMonthly}/mo`;
 }
 
+export function getToolRating(slug: string) {
+  const tool = getToolBySlug(slug);
+  if (!tool) return 4.0;
+  const normalized = Math.max(0, Math.min(1, tool.trendingScore / 100));
+  return Number((4 + normalized).toFixed(1));
+}
+
 export const landingSlugs = [
   "best-ai-tools",
   "free-ai-tools",

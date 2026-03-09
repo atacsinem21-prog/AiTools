@@ -1,18 +1,21 @@
 import Image from "next/image";
 import Link from "next/link";
-import { getPricingText, type Locale, type Tool } from "@/data/tools";
+import { getPricingText, getToolRating, type Locale, type Tool } from "@/data/tools";
 import { t } from "@/lib/i18n";
 
 type ToolCardProps = {
   tool: Tool;
   locale: Locale;
+  badges?: string[];
 };
 
-export function ToolCard({ tool, locale }: ToolCardProps) {
+export function ToolCard({ tool, locale, badges = [] }: ToolCardProps) {
   const pricingText = getPricingText(locale, tool.slug);
+  const rating = getToolRating(tool.slug);
+  const stars = "★".repeat(Math.round(rating));
 
   return (
-    <article className="flex h-full flex-col rounded-2xl border border-slate-800 bg-slate-900 p-5">
+    <article className="glass-card neon-outline flex h-full flex-col rounded-2xl p-5 transition-transform duration-300 hover:-translate-y-1">
       <div className="flex items-start gap-3">
         <Image
           src={tool.logo}
@@ -25,16 +28,27 @@ export function ToolCard({ tool, locale }: ToolCardProps) {
         />
         <div className="min-w-0">
           <h3 className="truncate text-lg font-semibold text-slate-100">{tool.name}</h3>
-          <span className="mt-1 inline-block rounded-full bg-cyan-500/10 px-2 py-1 text-xs text-cyan-300">
+          <span className="mt-1 inline-block rounded-full bg-cyan-500/15 px-2 py-1 text-xs text-cyan-300">
             {tool.category}
           </span>
           <div className="mt-2">
-            <span className="inline-block rounded-full bg-emerald-500/20 px-2 py-1 text-xs font-semibold text-emerald-300">
+            <span className="inline-block rounded-full bg-emerald-500/25 px-2 py-1 text-xs font-semibold text-emerald-300">
               {locale === "tr" ? "Fiyat: " : "Pricing: "}
               {pricingText}
             </span>
           </div>
         </div>
+      </div>
+
+      <div className="mt-3 flex flex-wrap items-center gap-2">
+        <span className="rounded-full bg-amber-500/25 px-2 py-1 text-xs font-semibold text-amber-300">
+          {stars} {rating}
+        </span>
+        {badges.map((badge) => (
+          <span key={badge} className="rounded-full bg-fuchsia-500/25 px-2 py-1 text-xs font-semibold text-fuchsia-300">
+            {badge}
+          </span>
+        ))}
       </div>
 
       <p className="mt-4 line-clamp-4 text-sm leading-6 text-slate-300">{tool.fullDescription[locale]}</p>

@@ -44,10 +44,37 @@ export default function HomePage({ params }: Props) {
 
   return (
     <div className="space-y-12">
-      <section className="rounded-3xl border border-slate-800 bg-gradient-to-br from-slate-900 to-slate-950 p-8">
-        <p className="text-sm uppercase tracking-widest text-cyan-300">AI Directory</p>
-        <h1 className="mt-3 text-3xl font-bold text-slate-100 md:text-4xl">{t(locale, "homeTitle")}</h1>
-        <p className="mt-3 max-w-3xl text-slate-300">{t(locale, "homeSubtitle")}</p>
+      <section className="glass-card neon-outline relative overflow-hidden rounded-3xl p-8 md:p-12">
+        <div className="pointer-events-none absolute -right-24 -top-16 h-64 w-64 rounded-full bg-indigo-500/30 blur-3xl" />
+        <div className="pointer-events-none absolute -bottom-24 left-10 h-64 w-64 rounded-full bg-cyan-500/20 blur-3xl" />
+        <div className="relative z-10">
+          <p className="text-xs uppercase tracking-[0.25em] text-cyan-300">AI Directory</p>
+          <h1 className="mt-4 max-w-4xl text-3xl font-bold text-slate-100 md:text-6xl">
+            {locale === "tr" ? "En iyi AI araclarini kesfet" : "Discover the best AI tools"}
+          </h1>
+          <p className="mt-4 max-w-2xl text-slate-300">
+            {locale === "tr"
+              ? "Yazma, kodlama, gorsel ve video icin en uygun AI aracini saniyeler icinde bul."
+              : "Find the perfect AI tool for writing, coding, image generation and video workflows."}
+          </p>
+          <div className="mt-8 max-w-3xl space-y-4">
+            <SearchBar tools={tools} locale={locale} showInlineResults={false} heroMode />
+            <div className="flex flex-wrap gap-3">
+              <Link
+                href={`/${locale}/directory`}
+                className="rounded-2xl bg-gradient-to-r from-indigo-500 to-cyan-400 px-5 py-3 text-sm font-semibold text-slate-950 hover:from-indigo-400 hover:to-cyan-300"
+              >
+                {locale === "tr" ? "Araclari gez" : "Browse tools"}
+              </Link>
+              <Link
+                href={`/${locale}/compare`}
+                className="rounded-2xl border border-slate-500 bg-slate-900/70 px-5 py-3 text-sm text-slate-100 hover:border-cyan-400"
+              >
+                {locale === "tr" ? "Karsilastirmalari ac" : "Open comparisons"}
+              </Link>
+            </div>
+          </div>
+        </div>
       </section>
 
       <section className="space-y-4 rounded-2xl border border-slate-800 bg-slate-900 p-6">
@@ -63,13 +90,18 @@ export default function HomePage({ params }: Props) {
         </p>
       </section>
 
-      <SearchBar tools={tools} locale={locale} />
-
       <section>
-        <h2 className="mb-4 text-2xl font-semibold text-slate-100">{t(locale, "trending")}</h2>
+        <h2 className="mb-4 text-2xl font-semibold text-slate-100">
+          {locale === "tr" ? "🔥 Trend AI araclari" : "🔥 Trending AI tools"}
+        </h2>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {trending.map((tool) => (
-            <ToolCard key={tool.slug} tool={tool} locale={locale} />
+            <ToolCard
+              key={tool.slug}
+              tool={tool}
+              locale={locale}
+              badges={[locale === "tr" ? "🔥 Trend" : "🔥 Trending"]}
+            />
           ))}
         </div>
       </section>
@@ -78,7 +110,7 @@ export default function HomePage({ params }: Props) {
         <h2 className="mb-4 text-2xl font-semibold text-slate-100">{t(locale, "newTools")}</h2>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {newTools.map((tool) => (
-            <ToolCard key={tool.slug} tool={tool} locale={locale} />
+            <ToolCard key={tool.slug} tool={tool} locale={locale} badges={[locale === "tr" ? "🆕 Yeni" : "🆕 New"]} />
           ))}
         </div>
       </section>

@@ -8,22 +8,25 @@ type NavbarProps = {
 
 export function Navbar({ locale }: NavbarProps) {
   return (
-    <header className="border-b border-slate-800 bg-slate-950/70 backdrop-blur">
+    <header className="sticky top-0 z-40 border-b border-slate-800/60 bg-slate-950/65 backdrop-blur-xl">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
         <Link href={`/${locale}`} className="text-lg font-semibold text-cyan-300">
           {t(locale, "siteName")}
         </Link>
-        <nav className="flex items-center gap-5 text-sm text-slate-300">
-          <Link href={`/${locale}/directory`} className="hover:text-cyan-300">
+        <nav className="glass-card flex items-center gap-2 rounded-full px-2 py-1 text-sm text-slate-300">
+          <Link href={`/${locale}/directory`} className="rounded-full px-3 py-2 hover:bg-slate-800/70 hover:text-cyan-300">
             {t(locale, "directory")}
           </Link>
-          <Link href={`/${locale}/compare`} className="hover:text-cyan-300">
+          <Link href={`/${locale}/compare`} className="rounded-full px-3 py-2 hover:bg-slate-800/70 hover:text-cyan-300">
             Compare
           </Link>
-          <Link href={`/${locale}/submit-tool`} className="hover:text-cyan-300">
+          <Link href={`/${locale}/submit-tool`} className="rounded-full px-3 py-2 hover:bg-slate-800/70 hover:text-cyan-300">
             {t(locale, "submit")}
           </Link>
-          <Link href={locale === "tr" ? "/en" : "/tr"} className="rounded border border-slate-700 px-2 py-1 hover:border-cyan-300">
+          <Link
+            href={locale === "tr" ? "/en" : "/tr"}
+            className="rounded-full border border-slate-700 px-3 py-1.5 text-xs hover:border-cyan-300"
+          >
             {locale === "tr" ? "EN" : "TR"}
           </Link>
         </nav>
