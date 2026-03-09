@@ -21,7 +21,7 @@
     - `SUPABASE_URL`
     - `SUPABASE_SERVICE_ROLE_KEY`
     - `PRODUCTHUNT_TOKEN`
-    - `GITHUB_TOKEN`
+    - `GH_PAT`
     - `REDDIT_USER_AGENT`
     - `RSS_FEED_URLS`
   - Run once from Actions tab using `workflow_dispatch` and verify logs.
@@ -33,7 +33,7 @@
   - `SUPABASE_ANON_KEY=...`
   - `SUPABASE_SERVICE_ROLE_KEY=...`
   - `PRODUCTHUNT_TOKEN=...`
-  - `GITHUB_TOKEN=...` (optional but recommended)
+  - `GH_TOKEN=...` (optional but recommended)
   - `REDDIT_USER_AGENT=global-ai-tools-bot/1.0`
   - `RSS_FEED_URLS=comma,separated,feed,urls`
 

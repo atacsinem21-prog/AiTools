@@ -7,7 +7,7 @@ dotenv.config({ path: ".env.local" });
 dotenv.config();
 
 const PRODUCTHUNT_TOKEN = process.env.PRODUCTHUNT_TOKEN;
-const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
+const GITHUB_TOKEN = process.env.GH_TOKEN ?? process.env.GITHUB_TOKEN;
 const REDDIT_USER_AGENT = process.env.REDDIT_USER_AGENT ?? "global-ai-tools-bot/1.0";
 const PRODUCTHUNT_FETCH_LIMIT = Number(process.env.PRODUCTHUNT_FETCH_LIMIT ?? 40);
 const GITHUB_FETCH_LIMIT = Number(process.env.GITHUB_FETCH_LIMIT ?? 50);
